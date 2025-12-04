@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nostalgy.Core</title>
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <link rel="stylesheet" href="style/style.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container-fluid banner vh-100">
+        <div class="container pt-4">
+            <div class="glass overflow-hidden">
+                <div class="blue-strip-bar">
+                    <div class="window-controls">
+                        <div class="win-btn">_</div>
+                        <div class="win-btn">□</div>
+                        <div class="win-btn close-x">X</div>
+                    </div>
+                </div>
+                <div class="glass-nav-body">
+                    <nav class="navbar navbar-expand-lg navbar-dark w-100 p-0">
+                        <div class="container-fluid p-0">
+                            <a href="inicio.html" class="brand-text navbar-brand">
+                                Nostalgy.Core
+                            </a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ms-auto gap-3 gap-lg-4 text-start ps-2 align-items-center"> 
+                                    <li class="nav-item"><a class="nav-link-retro fw-bold" href="#visor-inmersivo">Tienda</a></li>
+                                    <li class="nav-item"><a class="nav-link-retro fw-bold" href="#sobre-nosotros">Conocenos</a></li>
+                                    <li class="nav-item"><a class="nav-link-retro fw-bold" href="#contacto">Contacto</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+             </div>
+        </div>
+        <div class="container">
+            <div class="banner-box glass my-4 p-4 p-lg-5">
+                <div class="row align-items-center gy-3">
+                    <div class="col-12 col-lg-7 d-flex flex-column align-items-center">   
+                        <div class="title-container position-relative">
+                            <div class="title-pill">NOSTALGY</div>
+                            <div class="core-text">.CORE</div>
+                            <img src="recursos/manoPixel.webp" class="globe-icon position-absolute" alt="Globo Y2K">
+                        </div>
+                        <a href="#visor-inmersivo" class="btn-cyber-chrome my-4 mt-lg-5">
+                            <span class="chrome-text">Comprar</span>
+                            <div class="chrome-glare"></div>
+                        </a>
+
+                    </div>
+                    <div class="col-12 col-lg-5 d-flex justify-content-center">
+                        <div class="photo-container w-75 w-lg-100 d-flex justify-content-center">
+                            <div class="photo-circle-border">
+                                <img src="recursos/logoNC.webp" class="img-fluid rounded-circle" alt="TV Icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="visor-inmersivo" class="main-content position-relative w-100 vh-100 overflow-hidden">    
+        <div id="selector-bg"></div>
+        <div id="immersive-bg" class="position-absolute w-100 h-100 top-0 start-0" 
+            style="background-size: cover; background-position: center; transition: background-image 0.5s ease-in-out; z-index: 1;">
+            <div style="background-color: rgba(119, 112, 204, 0.592); width:100%; height:100%;"></div>
+        </div>
+        <div class="container-fluid h-100 position-relative" style="z-index: 5;">           
+            <div id="style-selector-ui" class="position-absolute top-50 start-50 translate-middle text-center w-100">
+                <h2 class="text-white mb-5 pixel-font" style="text-shadow: 0 0 10px #00ffaa;">ELIGE TU ESTILO</h2>
+                <div class="d-flex justify-content-center gap-4 gap-md-5 flex-wrap"></div>
+            </div>
+            <div id="tv-controls-container" class="position-absolute top-0 start-0 ms-4 mt-4 d-none" style="z-index: 20;">
+                <div class="tv-channel-bar" id="tv-buttons-wrapper"></div>
+            </div>
+            <div id="products-ui" class="position-absolute bottom-0 start-0 w-100 p-4 d-none">
+                <div class="container-fluid">
+                    <div class="row align-items-end">                        
+                        <div class="col-12 col-lg-3 mb-3 text-white">
+                            <h3 id="style-title" class="display-5 fw-bold mb-3" style="font-family: 'Sora'; text-transform: uppercase;">Estilo</h3>                            
+                            <div class="d-flex gap-2 mb-3">
+                                <button class="filter-pill active" onclick="filtrarProductos('wallpaper')">Wallpapers</button>
+                                <button class="filter-pill" onclick="filtrarProductos('iconos')">Pack de Iconos</button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-9">
+                            <div class="swiper myProductSwiper">
+                                <div class="swiper-wrapper" id="swiper-wrapper-products"></div>
+                                <div class="swiper-button-next" style="color: #0008ff;"></div>
+                                <div class="swiper-button-prev" style="color: #0008ff;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="vr-zone" class="position-relative w-100 overflow-hidden" style="z-index: 2; height: 100vh; background: #000;">    
+        <div id="vr-dynamic-bg" class="position-absolute top-0 start-0 w-100 h-100" 
+            style="z-index: 0; background-size: cover; background-position: center; transition: background-image 0.5s ease; opacity: 0.8;">
+        </div>
+        <div class="vr-overlay-effects"></div>
+        <div class="container-fluid h-100 position-relative d-flex flex-column justify-content-between py-4" style="z-index: 10; pointer-events: none;">            
+            <div class="vr-header text-center mt-5" style="pointer-events: auto;">
+                <h2 class="vr-main-title">
+                    Explora realidades que solían ser imposibles<br>
+                    Expreriencias VR
+                </h2>
+            </div>
+            <div class="vr-controls-area mb-5 pe-lg-5 d-flex justify-content-center justify-content-lg-end">                
+                <div class="d-flex align-items-center gap-3">
+                    <button class="vr-nav-btn prev-btn" style="pointer-events: auto;">&lt;</button>
+                    <div class="swiper vrSwiper" style="pointer-events: auto; width: 320px; border-radius: 20px;">
+                        <div class="swiper-wrapper" id="vr-swiper-wrapper">
+                            </div>
+                    </div>
+                    <button class="vr-nav-btn next-btn" style="pointer-events: auto;">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="surface-transition"></div>
+    <section id="sobre-nosotros" class="frutiger-section position-relative overflow-hidden">
+        <div class="sun-rays"></div>
+        <div class="sea-particles"></div>
+        <div class="frutiger-bg"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>        
+        <div class="container position-relative z-2 h-100 d-flex align-items-center justify-content-center">    
+            <div class="frutiger-glass-card row align-items-center p-4 p-lg-5">                
+                <div class="col-12 col-md-5 text-center mb-4 mb-md-0">
+                    <div class="logo-glow-container">
+                        <img src="recursos/logoNC.webp" alt="Nostalgy Core Logo" class="frutiger-logo">
+                    </div>
+                </div>
+                <div class="col-12 col-md-7 text-white">
+                    <h2 class="frutiger-title mb-4">NOSTALGY.CORE</h2>                    
+                    <p class="frutiger-text mb-4">
+                        Somos el archivo digital definitivo. Un puente entre la estética del pasado y la tecnología del futuro. 
+                        En Nostalgy.Core, no solo vendemos activos; preservamos la esencia de una era donde el internet era un lugar para soñar.
+                    </p>
+                    <a href="nosotros.html" class="btn-gel">
+                        <span>MÁS INFORMACIÓN</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="depth-fade"></div>
+        <div class="data-cable-container">
+            <div class="data-line"></div>
+            <div class="data-node"></div> 
+        </div>
+    </section>
+    <div id="contacto" class="container-fluid py-5 position-relative" style="z-index: 2;">
+        <div class="container">
+            <div class="ocean-wrapper" style="background: radial-gradient(circle at 70% 50%, #102838 0%, #050f16 60%, #000000 100%); border-radius: 30px; overflow: hidden; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid #00ffaa;">
+                <div class="row h-100 m-0">
+                    <div class="col-12 col-md-5 d-flex align-items-center" style="z-index: 5; position: relative;">
+                        <div class="contact-form-container w-100">
+                            <h3 class="text-white mb-3" style="font-family: 'Press Start 2P', cursive; text-shadow: 0 0 10px #00ffaa;">
+                                CONTACTO
+                            </h3>
+                            <form id="retroForm">
+                                <div class="mb-4">
+                                    <label class="text-white mb-2" style="font-family: 'Press Start 2P'; font-size: 0.6rem; color: #00ffaa !important;">&gt; NOMBRE COMPLETO</label>
+                                    <input type="text" class="form-control" style="background: rgba(255,255,255,0.1); border: none; border-bottom: 1px solid #00ffaa; color: white;" placeholder="Usuario...">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="text-white mb-2" style="font-family: 'Press Start 2P'; font-size: 0.6rem; color: #00ffaa !important;">&gt; EMAIL</label>
+                                    <input type="email" class="form-control" style="background: rgba(255,255,255,0.1); border: none; border-bottom: 1px solid #00ffaa; color: white;" placeholder="correo@red.com">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="text-white mb-2" style="font-family: 'Press Start 2P'; font-size: 0.6rem; color: #00ffaa !important;">&gt; MENSAJE</label>
+                                    <textarea class="form-control" rows="3" style="background: rgba(255,255,255,0.1); border: none; border-bottom: 1px solid #00ffaa; color: white;" placeholder="Escribe aquí..."></textarea>
+                                </div>
+                                <button type="submit" class="btn w-100" style="border: 1px solid #00ffaa; color: #00ffaa; font-family: 'Press Start 2P'; padding: 15px; background: transparent;">
+                                    [ ENVIAR ]
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7 position-relative p-0">
+                        <div id="fishTank" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;">
+                            <img src="recursos/coral-3.webp" class="coral-decor coral-center" alt="Fondo">
+                            <img src="recursos/coral-1.webp" class="coral-decor coral-left" alt="Coral Izq">
+                            <img src="recursos/coral-2.webp" class="coral-decor coral-right" alt="Coral Der">
+                            <div id="bubbles-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">CARRITO</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column p-0">
+            <div id="carrito-contenido" class="flex-grow-1 p-3" style="overflow-y: auto;">
+                <ul id="lista-carrito" class="list-unstyled"></ul>
+            </div>
+            <div class="cyber-total-section mt-auto">
+                <div class="d-flex justify-content-between mb-3">
+                    <span style="font-family: 'Press Start 2P'; font-size: 0.7rem; color: #a6c1ff;">TOTAL:</span>
+                    <span class="cyber-price" style="font-size: 1.2rem;">$<span id="total">0.00</span></span>
+                </div>                
+                <button id="pagar" class="btn-terminal btn-pay">
+                    [ PROCESAR PAGO ]
+                </button>                
+                <button id="limpiar-carrito" class="btn-terminal btn-clear">
+                    VACIAR CARRITO
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="imageViewerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" style="background: black; border: 2px solid #00ffaa;">
+                <div class="modal-header" style="border-bottom: 1px solid #00ffaa;">
+                    <h5 class="modal-title text-white pixel-font" style="font-size: 0.8rem;">IMAGE_VIEWER</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0 text-center">
+                    <img id="img-visor-src" src="" style="max-width: 100%; max-height: 80vh;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast-container position-fixed end-0 p-3" style="z-index: 1100; top: 100px !important;">    
+        <div id="liveToast" class="toast nostalgy-toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">> SYSTEM_MSG</strong>
+                <small>Just now</small>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toast-msg-body"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalCompraExitosa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content"> <div class="modal-header">
+                    <h5 class="modal-title pixel-font" style="font-size: 0.8rem;">
+                        > SYSTEM_MSG: PURCHASE_OK
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>                
+                <div class="modal-body text-center">
+                    <div class="mb-4 mt-2">
+                        <i class="bi bi-check-circle-fill" style="font-size: 4rem; color: #00ffaa; filter: drop-shadow(0 0 15px #00ffaa);"></i>
+                    </div>
+                    <h4 class="text-white pixel-font mb-3" style="font-size: 1rem; text-shadow: 0 0 10px #00ffaa;">
+                        TRANSACCIÓN APROBADA
+                    </h4>                    
+                    <p class="mb-4" style="color: #a6c1ff; font-family: 'Sora'; font-size: 0.9rem;">
+                        Acceso concedido al archivo digital.
+                    </p>                    
+                    <div id="lista-links-compra" class="text-start" style="max-height: 300px; overflow-y: auto; padding: 5px;"></div>
+                    <div class="mt-4">
+                        <p class="small text-muted pixel-font" style="font-size: 0.6rem;">
+                            <i class="bi bi-floppy"></i> GUARDAR_ENLACES_ANTES_DE_SALIR
+                        </p>
+                    </div>
+                </div>                
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn-cyber-chrome w-100 text-center" data-bs-dismiss="modal">
+                        <span class="chrome-text" style="color: #0a1a3a;">[ CERRAR Y FINALIZAR ]</span>
+                        <div class="chrome-glare"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="fab-cart-top" class="bubble-fab" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+        <i class="bi bi-cart3"></i>
+        <span id="fab-cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" 
+            style="font-family: 'Sora'; font-size: 0.6rem; border: 2px solid #000;">
+            0
+        </span>
+    </button>
+    <footer class="cyber-footer position-relative pt-5 pb-4" style="z-index: 2;">    
+        <div class="cyber-grid-bg"></div>        
+        <div class="container position-relative z-2">            
+            <div class="cyber-panel p-4 p-lg-5">                
+                <div class="row gy-5 justify-content-between">                    
+                    <div class="col-12 col-md-5">
+                        <h3 class="footer-brand pixel-font mb-3">
+                            NOSTALGY<span class="blink">_</span><span style="color: #00ffaa;">CORE</span>
+                        </h3>
+                        <p class="footer-txt">
+                            Preservando la estética digital del ayer
+                        </p>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <h5 class="footer-head pixel-font mb-4">NAVEGACIÓN</h5>
+                        <ul class="list-unstyled footer-menu">
+                            <li><a href="#visor-inmersivo" class="term-link">[ TIENDA ]</a></li>
+                            <li><a href="#sobre-nosotros" class="term-link">[ NOSOTROS ]</a></li>
+                            <li><a href="#contacto" class="term-link">[ CONTACTO ]</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-4 text-md-end">
+                        <div class="social-grid justify-content-md-end mb-4">
+                            <a href="#" class="cyber-icon-btn instagram" title="Instagram">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="#" class="cyber-icon-btn tiktok" title="TikTok">
+                                <i class="bi bi-tiktok"></i>
+                            </a>
+                            <a href="#" class="cyber-icon-btn twitter" title="X">
+                                <i class="bi bi-twitter-x"></i>
+                            </a>
+                            <a href="https://wa.me/NUMERO" class="cyber-icon-btn whatsapp" title="WhatsApp">
+                                <i class="bi bi-whatsapp"></i>
+                            </a>
+                        </div>
+                        <div class="payments opacity-50 text-small" style="color: white;">
+                            ACEPTAMOS: <i class="bi bi-credit-card-2-front ms-2"></i> <i class="bi bi-paypal ms-2"></i> <i class="bi bi-currency-bitcoin ms-2"></i>
+                        </div>
+                    </div>
+                </div>                
+                <div class="footer-bottom mt-5 pt-3 border-top border-secondary">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-center text-md-start">
+                            <p class="mb-0 small text-muted font-monospace">
+                                © 2024 NOSTALGY.CORE INC.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="fab-wrapper">
+        <button id="btn-back-to-top" class="bubble-fab" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+            <i class="bi bi-arrow-up-short"></i>
+        </button>
+        <button id="pwa-install-btn" class="bubble-fab d-none" title="Instalar App">
+            <i class="bi bi-download"></i>
+        </button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.js" integrity="sha512-wrQIZRuIVRafoAsp5i2HIXa+3oF+lQqx4eOMAdw+vt7npivM7+D4OMIZPhlkdbV18VxZLkn2QaOii6cr8c1+dA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/pwa.js"></script>
+    <script type="module" src="scripts/productos.js"></script>
+</body>
+</html>

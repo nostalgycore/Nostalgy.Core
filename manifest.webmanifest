@@ -1,0 +1,23 @@
+{
+  "name": "Nostalgy.Core",
+  "short_name": "Nostalgy.Core",
+  "description": "Sistema de tienda online progresiva",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000080",
+  "orientation": "portrait",
+  "scope": "./",
+  "icons": [
+  {
+    "src": "recursos/icon-1.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  },
+  {
+    "src": "recursos/icon-2.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }
+]
+}

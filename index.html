@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOSTALGY.CORE</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #000; /* Fondo negro apagado */
+            overflow: hidden;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        /* --- 1. CONTENEDOR PRINCIPAL (LA PANTALLA) --- */
+        .crt-screen {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+
+            /* ANIMACIÓN DE ENCENDIDO DE TV */
+            /* Empieza como una línea y se abre */
+            animation: turnOnCRT 3s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            opacity: 0;
+            transform: scale(1, 0.002); /* Empezamos aplastados */
+        }
+
+        /* --- 2. TU VIDEO DE FONDO --- */
+        #tv-static {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.4; /* Un poco transparente para que no moleste al leer */
+            filter: contrast(120%) brightness(80%);
+        }
+
+        /* --- 3. CAPA DE SCANLINES (RAYAS DE TV) --- */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.3) 50%,
+                rgba(0,0,0,0.3)
+            );
+            background-size: 100% 4px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* --- 4. CONTENIDO (TEXTO Y BOTONES) --- */
+        .content-box {
+            z-index: 20;
+            text-align: center;
+            opacity: 0; /* Empieza invisible */
+            animation: fadeInText 1s ease-out forwards;
+            animation-delay: 2.5s; /* Aparece DESPUÉS de que la TV encienda */
+        }
+
+        h1 {
+            color: #00ffaa;
+            font-size: 3rem; /* Grande en PC */
+            text-shadow: 4px 4px 0px #000, 0 0 20px #00ffaa;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            color: #fff;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            margin-bottom: 60px;
+            text-shadow: 2px 2px 0 #000;
+            animation: blink 2s infinite;
+        }
+
+        /* BOTONES ESTILO RETRO */
+        .menu-btn {
+            display: block;
+            width: 280px;
+            margin: 20px auto;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ffaa;
+            color: #00ffaa;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 255, 170, 0.2);
+        }
+
+        /* Efecto Hover Glitch */
+        .menu-btn:hover {
+            background: #00ffaa;
+            color: #000;
+            box-shadow: 0 0 30px #00ffaa;
+            transform: scale(1.05) skewX(-2deg);
+        }
+
+        .menu-btn.admin {
+            border-color: #ff0055;
+            color: #ff0055;
+        }
+        .menu-btn.admin:hover {
+            background: #ff0055;
+            color: #fff;
+            box-shadow: 0 0 30px #ff0055;
+        }
+
+        /* --- KEYFRAMES (LAS ANIMACIONES) --- */
+        
+        /* Simulación de encendido CRT */
+        @keyframes turnOnCRT {
+            0% {
+                opacity: 0;
+                transform: scale(1, 0.002); /* Línea cerrada */
+                filter: brightness(30); /* Destello blanco */
+            }
+            30% {
+                opacity: 1;
+                transform: scale(1, 0.002); /* Se mantiene línea un momento */
+                filter: brightness(10);
+            }
+            50% {
+                transform: scale(1, 1.1); /* Se abre de golpe (rebote) */
+                filter: brightness(5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1, 1); /* Tamaño normal */
+                filter: brightness(1);
+            }
+        }
+
+        @keyframes fadeInText {
+            to { opacity: 1; }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Ajustes Móvil */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .menu-btn { width: 90%; }
+        }
+
+        /* Animación de Apagado */
+        .crt-off {
+            animation: turnOffCRT 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards !important;
+        }
+        /* --- ESTILOS DEL LOGIN HACKER --- */
+        #login-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); /* Fondo oscuro semitransparente */
+            display: flex; justify-content: center; align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .login-box {
+            background: #000;
+            border: 2px solid #00ffaa;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 255, 170, 0.4);
+            animation: zoomIn 0.3s ease-out;
+        }
+
+        .login-box input {
+            background: #001100;
+            border: 1px solid #00ffaa;
+            color: #00ffaa;
+            font-family: 'Press Start 2P';
+            font-size: 0.8rem;
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: center;
+            outline: none;
+        }
+
+        .login-actions {
+            display: flex; justify-content: space-between; gap: 10px;
+        }
+
+        .btn-retro-small {
+            background: transparent;
+            border: 1px solid #555;
+            color: #888;
+            font-family: 'Press Start 2P';
+            font-size: 0.6rem;
+            padding: 10px;
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        .btn-retro-small:hover { background: #333; color: white; }
+
+        .btn-retro-small.action {
+            border-color: #00ffaa;
+            color: #00ffaa;
+        }
+
+        .btn-retro-small.action:hover {
+            background: #00ffaa;
+            color: black;
+            box-shadow: 0 0 10px #00ffaa;
+        }
+
+        /* Utilidad para ocultar */
+        .d-none { display: none !important; }
+
+        @keyframes zoomIn { from { transform: scale(0); } to { transform: scale(1); } }
+        @keyframes turnOffCRT {
+            0% {
+                opacity: 1;
+                transform: scale(1, 1);
+                filter: brightness(1);
+            }
+            40% {
+                opacity: 1;
+                transform: scale(1, 0.002); /* Se aplasta verticalmente */
+                filter: brightness(10);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0, 0.002); /* Se cierra horizontalmente */
+                filter: brightness(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="crt-screen">
+        
+        <video autoplay muted loop playsinline id="tv-static">
+            <source src="recursos/tvrota.mp4" type="video/mp4">
+        </video>
+
+        <div class="content-box">
+            <h1>NOSTALGY<br>.CORE</h1>
+            <p class="subtitle">BIENVENIDO_</p>
+
+            <a href="inicio.html" class="menu-btn">
+                <i class="bi bi-play-fill"></i> Modo Cliente
+            </a>
+
+            <a href="admin.html" class="menu-btn admin">
+                <i class="bi bi-database-lock"></i> Modo Admin
+            </a>
+        </div>
+        <div id="login-overlay" class="d-none">
+            <div class="login-box">
+                <p class="blink">> ENTER_PASSWORD:</p>
+                <input type="password" id="admin-pass-input" placeholder="******" maxlength="10">
+                <div class="login-actions">
+                    <button id="btn-cancel-login" class="btn-retro-small">CANCEL</button>
+                    <button id="btn-confirm-login" class="btn-retro-small action">ACCESS</button>
+                </div>
+                <p id="login-error" class="text-danger mt-2 d-none" style="font-size: 0.6rem;">> ACCESS_DENIED</p>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/pwa.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const screen = document.querySelector('.crt-screen');
+            
+            // Elementos del Login
+            const modal = document.getElementById('login-overlay');
+            const inputPass = document.getElementById('admin-pass-input');
+            const errorMsg = document.getElementById('login-error');
+            const btnCancel = document.getElementById('btn-cancel-login');
+            const btnConfirm = document.getElementById('btn-confirm-login');
+            
+            // La contraseña (CÁMBIALA AQUÍ)
+            const PASSWORD_SECRETA = "1234"; 
+
+            // Función para ejecutar la transición de salida (Apagar TV)
+            function ejecutarTransicion(urlDestino) {
+                document.body.style.overflow = 'hidden';
+                document.body.style.backgroundColor = '#000';
+                screen.classList.add('crt-off');
+                setTimeout(() => { window.location.href = urlDestino; }, 600);
+            }
+
+            // 1. Manejo del botón CLIENTE (Directo)
+            const btnCliente = document.querySelector('.menu-btn[href="inicio.html"]');
+            if(btnCliente) {
+                btnCliente.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    ejecutarTransicion(btnCliente.href);
+                });
+            }
+
+            // 2. Manejo del botón ADMIN (Con Login)
+            const btnAdmin = document.querySelector('.menu-btn.admin');
+            if(btnAdmin) {
+                btnAdmin.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Mostrar el modal
+                    modal.classList.remove('d-none');
+                    inputPass.value = ''; // Limpiar input
+                    inputPass.focus();
+                    errorMsg.classList.add('d-none');
+                });
+            }
+
+            // 3. Lógica dentro del Modal
+            
+            // Confirmar contraseña
+            function checkPassword() {
+                if(inputPass.value === PASSWORD_SECRETA) {
+                    // ¡Correcto!
+                    modal.classList.add('d-none'); // Ocultar modal
+                    ejecutarTransicion('admin.html'); // Ir a admin con efecto
+                } else {
+                    // Incorrecto
+                    errorMsg.classList.remove('d-none');
+                    inputPass.value = '';
+                    // Efecto de temblor (visual feedback)
+                    inputPass.style.borderColor = 'red';
+                    setTimeout(() => inputPass.style.borderColor = '#00ffaa', 500);
+                }
+            }
+
+            btnConfirm.addEventListener('click', checkPassword);
+            
+            // Permitir dar Enter en el input
+            inputPass.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') checkPassword();
+            });
+
+            // Cancelar / Cerrar modal
+            btnCancel.addEventListener('click', () => {
+                modal.classList.add('d-none');
+                errorMsg.classList.add('d-none');
+            });
+        });
+    </script>
+</body>
+</html>
