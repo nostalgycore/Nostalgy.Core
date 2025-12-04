@@ -1,0 +1,2726 @@
+/* =========================================
+   1. CONFIGURACIÓN GENERAL
+   ========================================= */
+body {
+    cursor: url('../recursos/cursor-pixel.webp'), auto;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    overflow-x: hidden;
+    font-family: 'Sora', sans-serif;
+}
+
+/* Enlaces y botones con manita pixel */
+a, button, .style-bubble, .cyber-img-box, .btn-cyber-add {
+    cursor: url('../recursos/mano-pixel.png'), pointer;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background: #1a1a1a; 
+}
+::-webkit-scrollbar-thumb {
+    background: #00ffaa; 
+    border-radius: 6px;
+    border: 3px solid #1a1a1a; 
+}
+
+/* =========================================
+   2. BANNER Y NAVEGACIÓN (TU DISEÑO ORIGINAL)
+   ========================================= */
+.banner{
+    background-image: url('../recursos/fondo.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.banner::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(119, 112, 204, 0.592); 
+}
+
+/* Efecto Vidrio con borde RIDGE (Tu estilo original) */
+.glass{
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 10px ridge rgba(255, 255, 255, 0.18); /* Tu borde original */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    position: relative;
+    z-index: 2;
+}
+
+.blue-strip-bar {
+    background: linear-gradient(to right, #000080, #1084d0);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    height: 28px; width: 100%;
+    display: flex; justify-content: flex-end; align-items: center;
+    padding-right: 8px;
+}
+
+.glass-nav-body { padding: 10px 25px; }
+
+.brand-text {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.6rem; color: white;
+    text-shadow: 2px 2px 0px #000;
+    text-decoration: none; margin-right: auto;
+}
+
+/* Botones ventana */
+.window-controls { display: flex; gap: 4px; pointer-events: none; }
+
+.win-btn {
+    width: 18px; height: 18px;
+    background-color: #c0c0c0;
+    border: 1px solid #fff; border-right-color: #808080; border-bottom-color: #808080;
+    display: flex; justify-content: center; align-items: center;
+    font-family: sans-serif; font-size: 9px; font-weight: bold; color: black;
+}
+.win-btn.close-x { background-color: #ff3b3b; color: white; }
+
+/* Nav Links Retro */
+.nav-link-retro {
+    position: relative; color: #ffffff !important;
+    text-decoration: none; padding: 5px 10px;
+    transition: all 0.2s ease;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+}
+.nav-link-retro:hover {
+    color: #00ffaa !important;
+    text-shadow: 0 0 5px #00ffaa, 0 0 10px #00ffaa, 2px 2px 0px rgba(0,0,0,0.5);
+    transform: translateY(-2px);
+}
+.nav-link-retro::before, .nav-link-retro::after {
+    position: absolute; opacity: 0; color: #00ffaa; transition: all 0.2s ease;
+}
+.nav-link-retro::before { content: '['; left: -10px; transform: translateX(10px); }
+.nav-link-retro::after { content: ']'; right: -10px; transform: translateX(-10px); }
+
+.nav-link-retro:hover::before { opacity: 1; transform: translateX(0); left: -15px; }
+.nav-link-retro:hover::after { opacity: 1; transform: translateX(0); right: -15px; }
+
+/* Animaciones Nav */
+.navbar-nav .nav-item {
+    opacity: 0; animation: fadeInDown 0.5s ease-out forwards;
+}
+.navbar-nav .nav-item:nth-child(1) { animation-delay: 0.7s; }
+.navbar-nav .nav-item:nth-child(2) { animation-delay: 1.0s; }
+.navbar-nav .nav-item:nth-child(3) { animation-delay: 1.2s; }
+.navbar-nav .nav-item:nth-child(4) { animation-delay: 1.4s; }
+.navbar-nav .nav-item:nth-child(5) { animation-delay: 1.6s; }
+
+/* =========================================
+   3. CONTENIDO BANNER (LOGO Y TV)
+   ========================================= */
+.banner-box { overflow: hidden; }
+.title-container { animation: zoomIn 0.8s ease-out; }
+
+.title-pill {
+    background: linear-gradient(to right, #00ffaa, #00b894);
+    color: #1a1a1a;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 2.5rem; padding: 15px 40px;
+    border-radius: 50px; margin-right: 30px;
+    box-shadow: 0 0 15px #00ffaa;
+}
+
+.core-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 2rem; color: white;
+    text-shadow: 2px 2px #000;
+    position: absolute; bottom: -25px; right: 15%;
+}
+
+.globe-icon {
+    width: 100px; height: 100px;
+    position: absolute; top: 60%; right: 0; transform: translateY(-50%);
+}
+
+.photo-container { animation: zoomIn 0.8s ease-out; }
+
+.photo-circle-border {
+    width: min(50vh, 400px); height: min(50vh, 400px);
+    background: transparent; border-radius: 50%;
+    border: 4px dashed #00ffaa;
+    box-shadow: 0 0 20px #00ffaa, inset 0 0 20px #00ffaa;
+    display: flex; justify-content: center; align-items: center;
+    animation: pulseGlow 2s infinite alternate;
+}
+
+.photo-circle-border img {
+    animation: floatTV 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 170, 0.6));
+}
+
+.main-content {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* FONDO */
+    background-image: url('../recursos/fondo2.webp');
+    background-size: cover;
+    background-position: center;
+
+    /* --- CAMBIOS DE ALTURA (AQUÍ ESTÁ LA CLAVE) --- */
+    border-radius: 0; 
+    
+    /* 1. Subimos la sección agresivamente (-120px) */
+    /* Esto hace que el agua "inunde" más la pantalla de arriba */
+    margin-top: -120px; 
+    
+    /* 2. Empujamos el contenido interno hacia abajo (220px) */
+    /* Necesario para que el título no quede tapado por la cresta de la ola */
+    padding-top: 220px; 
+
+    /* --- MÁSCARA SVG --- */
+    /* Usamos la misma curva profunda de antes... */
+    --wave-high: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L0,320Z' fill='black'/%3E%3C/svg%3E");
+    
+    -webkit-mask-image: var(--wave-high), linear-gradient(black, black);
+    mask-image: var(--wave-high), linear-gradient(black, black);
+
+    /* --- TAMAÑO DE LA OLA (LO IMPORTANTE) --- */
+    /* 100% ancho
+       150px de ALTO (Antes era 80px). Esto estira la curva verticalmente.
+    */
+    -webkit-mask-size: 100% 150px, 100% calc(100% - 149px);
+    mask-size: 100% 150px, 100% calc(100% - 149px);
+
+    -webkit-mask-position: top, bottom;
+    mask-position: top, bottom;
+
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+/* =========================================
+   5. TIENDA CYBERCORE (AZUL/CRISTAL) - NUEVO ESTILO
+   ========================================= */
+
+/* Variables Cybercore Cristal */
+:root {
+    --cyber-ice-blue: #a6c1ff;
+    --cyber-electric-blue: #4a76fd;
+    --cyber-deep-blue: #0a1a3a;
+    --cyber-chrome: linear-gradient(135deg, #e0e0e0 0%, #ffffff 50%, #a0a0a0 100%);
+    --cyber-glass-bg: linear-gradient(145deg, rgba(10, 26, 58, 0.8), rgba(74, 118, 253, 0.1));
+}
+
+/* Tarjetas Estilo Cubo de Cristal */
+.cyber-card {
+    background: var(--cyber-glass-bg);
+    border: 2px solid var(--cyber-ice-blue);
+    box-shadow: 0 0 20px rgba(74, 118, 253, 0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 12px; overflow: hidden;
+    transition: all 0.3s ease; height: 100%;
+    display: flex; flex-direction: column;
+}
+.cyber-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px var(--cyber-electric-blue);
+    border-color: white;
+}
+
+.cyber-img-box {
+    height: 220px; border-bottom: 1px solid var(--cyber-electric-blue);
+    overflow: hidden; position: relative;
+}
+.cyber-img-box img {
+    width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;
+}
+.cyber-img-box:hover img { transform: scale(1.1); }
+
+.cyber-body {
+    padding: 20px; flex-grow: 1;
+    display: flex; flex-direction: column;
+    color: var(--cyber-ice-blue);
+    background: rgba(10, 26, 58, 0.4);
+}
+
+.cyber-tag {
+    background: rgba(74, 118, 253, 0.2);
+    border: 1px solid var(--cyber-ice-blue);
+    color: white; padding: 4px 10px; font-size: 0.7rem;
+    border-radius: 20px;
+}
+
+.cyber-price {
+    font-family: 'Press Start 2P'; color: white; font-size: 1rem;
+    text-shadow: 0 0 8px var(--cyber-electric-blue);
+}
+
+/* Botones y Inputs de la tienda */
+.btn-cyber-add {
+    background: var(--cyber-chrome);
+    color: #0a1a3a; border: none;
+    font-family: 'Press Start 2P'; font-size: 0.7rem;
+    padding: 10px 18px; border-radius: 20px;
+    transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+.btn-cyber-add:hover {
+    background: white; box-shadow: 0 0 15px var(--cyber-ice-blue);
+}
+
+.cyber-qty-input {
+    background: rgba(0,0,0,0.5) !important;
+    border: 1px solid var(--cyber-ice-blue) !important;
+    color: white !important; text-align: center;
+    border-radius: 8px !important; width: 50px;
+}
+
+/* =========================================
+   6. CARRITO (OFFCANVAS AZUL)
+   ========================================= */
+#cartOffcanvas {
+    background: linear-gradient(to left, rgba(10, 26, 58, 0.98), rgba(5, 10, 20, 0.99));
+    border-left: 2px solid var(--cyber-electric-blue);
+    box-shadow: -10px 0 40px rgba(74, 118, 253, 0.4);
+    color: var(--cyber-ice-blue);
+    z-index: 10500 !important;
+}
+.offcanvas-backdrop { z-index: 10400 !important; }
+
+#cartOffcanvas .offcanvas-header {
+    border-bottom: 1px solid var(--cyber-electric-blue);
+    background: rgba(74, 118, 253, 0.1);
+}
+.offcanvas-title {
+    font-family: 'Press Start 2P'; font-size: 0.8rem; color: white;
+}
+
+.cyber-list-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--cyber-ice-blue);
+    margin-bottom: 10px; padding: 10px; border-radius: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.cyber-total-section {
+    border-top: 1px solid var(--cyber-electric-blue);
+    background: rgba(0,0,0,0.5); padding: 20px;
+}
+
+.btn-terminal {
+    width: 100%; padding: 12px; margin-bottom: 10px;
+    font-family: 'Press Start 2P'; font-size: 0.6rem;
+    text-transform: uppercase; border-radius: 30px;
+    transition: 0.3s; border: none;
+}
+.btn-pay { background: var(--cyber-chrome); color: #0a1a3a; }
+.btn-pay:hover { background: white; box-shadow: 0 0 15px #fff; }
+.btn-clear { background: transparent; border: 1px solid var(--cyber-ice-blue); color: var(--cyber-ice-blue); }
+.btn-clear:hover { background: rgba(255,0,0,0.2); border-color: red; color: white; }
+
+
+
+/* =========================================
+   7. CONTACTO Y FORMULARIO (CORREGIDO)
+   ========================================= */
+#contacto {
+    background-color: #020c12; width: 100%;
+    padding-top: 80px; padding-bottom: 80px;
+    position: relative;
+    z-index: 2;
+}
+
+.ocean-wrapper {
+    background: radial-gradient(circle at 70% 50%, #102838 0%, #050f16 60%, #000000 100%);
+    border-radius: 30px; overflow: hidden; position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid #00ffaa;
+    min-height: auto; 
+}
+
+/* Inputs y Placeholder corrección */
+.form-control {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: none !important;
+    border-bottom: 1px solid #00ffaa !important;
+    color: white !important;
+    border-radius: 0 !important;
+}
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 0 10px rgba(0, 255, 170, 0.2);
+}
+
+/* CORRECCIÓN DEL TEXTO INVISIBLE (PLACEHOLDER) */
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+    opacity: 1;
+}
+
+/* =========================================
+   8. ANIMACIONES
+   ========================================= */
+@keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes textFloat { 0% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -65%); } 100% { transform: translate(-50%, -50%); } }
+@keyframes pulseGlow { 0% { box-shadow: 0 0 20px #00ffaa, inset 0 0 20px #00ffaa; border-color: #00ffaa; } 100% { box-shadow: 0 0 40px #00ffaa, inset 0 0 40px #00ffaa; border-color: #bdffe8; } }
+@keyframes floatTV { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+@keyframes blinker { 50% { opacity: 0; } }
+
+/* =========================================
+   9. RESPONSIVE MÓVIL (TUS AJUSTES ORIGINALES)
+   ========================================= */
+@media (max-width: 768px) {
+    .title-pill { font-size: 1.5rem; padding: 10px 20px; margin-right: 15px; }
+    .core-text { font-size: 1.2rem; bottom: -15px; }
+    .globe-icon { width: 60px; height: 60px; }
+    .pixel-button { font-size: 0.7rem; padding: 10px 20px; }
+    .photo-circle-border { width: 250px; height: 250px; }
+    .ocean-wrapper .col-md-7 { min-height: 300px !important; height: 300px !important; display: block !important; margin-top: 20px; }
+    #fishTank { width: 100% !important; height: 100% !important; min-height: 100% !important; display: block !important; }
+    .ocean-wrapper { height: auto !important; padding-bottom: 20px; }
+}
+
+@media (max-width: 576px) {
+    .title-pill { font-size: 1.2rem; }
+    .core-text { font-size: 1rem; bottom: -12px; }
+    .photo-circle-border { width: 200px; height: 200px; }
+}
+
+/*Nuevo css despues acomodar*/
+
+/* =========================================
+   OPTIMIZACIÓN MÓVIL Y TABLET
+   (Afecta a pantallas de 768px para abajo)
+   ========================================= */
+@media (max-width: 768px) {
+    
+    /* 2. SECCIÓN ESTILOS (Arriba de las nubes) */
+    /* Reducimos el relleno inferior para que las nubes suban */
+    .main-content {
+        /* Antes tenía mucho espacio abajo, lo reducimos */
+        padding-bottom: 70px !important; 
+    }
+    
+    /* "Compactamos" el contenedor interno de los estilos */
+    /* Usamos !important para ganarle a las clases de Bootstrap (pt-5 pb-5) */
+    .main-content .container {
+        padding-top: 1rem !important;    /* Menos espacio arriba del título "Estilos" */
+        padding-bottom: 2rem !important; /* Menos espacio abajo de las burbujas */
+    }
+
+    /* 3. SECCIÓN TIENDA (Abajo de las nubes) */
+    .shop-section {
+        /* Reducimos drásticamente el espacio antes del título */
+        /* Prueba con 60px. Si el título toca las nubes, súbelo a 80px */
+        padding-top: 20px; 
+        
+        /* Reducimos espacio al final de la tienda*/
+        padding-bottom: 10px;
+    }
+
+    /* Opcional: Reducir un poco el tamaño del título "Nuestros Productos" en móvil */
+    .section-title {
+        font-size: 1.3rem; 
+        margin-bottom: 2rem !important; /* Menos espacio debajo del título */
+    }
+}
+
+/* --- ESTILOS VISOR INMERSIVO --- */
+
+/* Círculos de Selección de Estilo */
+.style-circle-btn {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    background: #ff0000;
+}
+.style-circle-btn img {
+    width: 100%; height: 100%; object-fit: cover; opacity: 1; transition: 0.3s;
+}
+.style-circle-btn:hover {
+    transform: scale(1.2);
+    border-color: #00ffaa;
+    box-shadow: 0 0 30px rgba(0, 255, 170, 0.5);
+}
+.style-circle-btn:hover img { opacity: 1; }
+.style-label {
+    margin-top: 15px; color: white; font-family: 'Press Start 2P'; font-size: 0.7rem;
+    opacity: 0; transition: 0.3s;
+}
+.style-item:hover .style-label { opacity: 1; transform: translateY(5px); }
+
+/* Filtros (Botones pequeños) */
+.filter-pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white; padding: 5px 15px; border-radius: 20px;
+    font-size: 0.8rem; cursor: pointer; transition: 0.3s;
+}
+.filter-pill.active, .filter-pill:hover {
+    background: #00ffaa; color: black; border-color: #00ffaa;
+    box-shadow: 0 0 10px rgba(0,255,170,0.5);
+}
+
+/* Adaptación Móvil */
+@media(max-width: 768px){
+    .style-circle-btn { width: 80px; height: 80px; }
+    #products-ui { padding-bottom: 80px !important; } /* Espacio para no chocar con nav del navegador */
+}
+
+/* AJUSTES PARA TARJETAS VIEJAS EN CARRUSEL */
+.swiper-slide .cyber-card {
+    background: rgba(10, 26, 58, 0.6); /* Fondo semi-transparente para leer texto */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 170, 0.3);
+}
+
+.swiper-slide .cyber-img-box img {
+    /* Asegurar que la imagen cubra bien el espacio */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Hover effect en el carrusel */
+.swiper-slide-thumb-active .cyber-card,
+.swiper-slide .cyber-card:hover {
+    border-color: #00ffaa;
+    box-shadow: 0 0 20px rgba(0, 255, 170, 0.2);
+    transform: translateY(-5px);
+}
+
+/* =========================================
+   ESTILO TOAST (IGUAL AL CARRITO)
+   ========================================= */
+.nostalgy-toast {
+    background: #050a14 !important;
+    /* Quitamos el border fijo de aquí, o lo dejamos como fallback */
+    border: 1px solid #4a76fd; 
+    border-radius: 12px;
+    min-width: 320px;
+    overflow: hidden;
+    cursor: pointer;
+    pointer-events: auto;
+    
+    /* AGREGAMOS ESTO: Transición suave para cambios de color */
+    transition: all 0.3s ease;
+}
+
+.nostalgy-toast .toast-header {
+    /* Encabezado azulado translúcido */
+    background: rgba(74, 118, 253, 0.15);
+    border-bottom: 1px solid #4a76fd;
+    color: #fff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.75rem;
+    padding: 10px 15px;
+}
+
+.nostalgy-toast .toast-body {
+    color: #a6c1ff; /* Texto azul claro */
+    font-family: 'Sora', sans-serif;
+    font-size: 0.9rem;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Icono dentro del toast */
+.nostalgy-toast .bi-check-circle-fill {
+    color: #00ffaa; /* Check verde para éxito */
+    font-size: 1.4rem;
+    filter: drop-shadow(0 0 5px #00ffaa);
+}
+/* =========================================
+   ESTILOS DE TEXTO DEL TOAST (ARREGLO)
+   ========================================= */
+
+/* 1. EL TÍTULO (> SYSTEM_MSG) */
+/* Forzamos la fuente pixelada siempre */
+.nostalgy-toast .toast-header strong {
+    font-family: 'Press Start 2P', cursive !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 1px;
+}
+
+/* 2. EL CUERPO DEL MENSAJE */
+/* Usamos 'Sora' para que se lea bien, o cámbialo a 'Press Start 2P' si quieres todo pixelado */
+.nostalgy-toast .toast-body {
+    font-family: 'Sora', sans-serif !important;
+    font-size: 0.9rem !important; 
+    font-weight: 500;
+    line-height: 1.4;
+    color: #fff;
+    
+    /* Flexbox para alinear icono y texto */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Ajuste del icono dentro del mensaje */
+.nostalgy-toast .toast-body i {
+    font-size: 1.4rem;
+}
+
+/* --- 2. TÍTULOS DE ESTILO PERSONALIZADOS --- */
+
+/* Estilo Y2K: Pixelado, Rosa/Verde Neon */
+.title-y2k {
+    font-family: 'Press Start 2P', cursive !important;
+    color: #ff77ff;
+    text-shadow: 3px 3px 0px #00ffaa;
+    letter-spacing: 2px;
+}
+
+/* ESTILO DE TEXTO 'FRUTIGER AERO' MEJORADO - Basado en la imagen de referencia */
+.title-frutiger {
+    font-family: 'Fredoka', sans-serif !important;
+    font-weight: 700; 
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    /* AQUI ESTÁ LA MAGIA DE LOS COLORES: */
+    background: linear-gradient(
+        180deg, 
+        #ffffff 20%,      /* 1. Arriba: Blanco puro (Reflejo de luz fuerte) */
+        #d1ffea 45%,      /* 2. Medio-Alto: Un verde menta muuuuy clarito */
+        
+        /* EL CORTE DURO (Horizonte) */
+        #00c27e 50%,      /* 3. Medio-Bajo: Verde trébol sólido (Aquí empieza el color fuerte) */
+        
+        #00ffaa 100%      /* 4. Abajo: Tu verde neón brillante característico */
+    );
+
+    /* Recortes técnicos estándar */
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    /* El borde blanco (Sticker) */
+    -webkit-text-stroke: 4px white; 
+    paint-order: stroke fill; /* Esto asegura que el borde no tape el color verde */
+
+    /* Sombra para despegarlo del fondo */
+    filter: drop-shadow(0 5px 0px rgba(0, 100, 80, 0.6));
+    
+    position: relative;
+    z-index: 10;
+}
+
+/* ESTILO CYBER CORE: CHROME/SILVER (CROMO PLATEADO) */
+.title-cibercore {
+    /* Tipografía rápida y agresiva */
+    font-family: 'Sora', sans-serif !important;
+    font-weight: 900;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-style: italic; /* Inclinación para dinamismo */
+    letter-spacing: -2px;
+
+    /* EL DEGRADADO CROMADO (SILVER CHROME) */
+    background: linear-gradient(
+        180deg, 
+        #ffffff 25%,      /* 1. Brillo especular (Blanco puro) */
+        #d4d4d4 45%,      /* 2. Plata claro */
+        #666666 50%,      /* 3. EL HORIZONTE (Gris oscuro) - Crea el efecto metal */
+        #b0b0b0 80%,      /* 4. Reflejo del suelo (Plata medio) */
+        #ffffff 100%      /* 5. Destello final abajo */
+    );
+    
+    /* Recorte técnico para pintar las letras */
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    /* Borde blanco nítido (el borde del metal) */
+    -webkit-text-stroke: 2px white;
+    paint-order: stroke fill;
+
+    /* FILTROS: PROFUNDIDAD + GLOW NEÓN */
+    filter: 
+        /* Capas de sombra sólida para el bloque 3D (Gris oscuro casi negro) */
+        drop-shadow(2px 2px 0px #333)
+        drop-shadow(4px 4px 0px #222)
+        drop-shadow(6px 6px 0px #000)
+        
+        /* EL GLOW: Un aura violeta/fucsia para que resalte el plata */
+        drop-shadow(0 0 5px rgba(255, 255, 255, 0.8)) /* Brillo blanco cercano */
+        drop-shadow(0 0 20px #d900ff); /* Resplandor Cyber Magenta */
+
+    position: relative;
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+
+/* ESTILO OLD WEB: WINDOWS 84 (SCANLINES / PERSIANA) */
+.title-oldweb {
+    /* Fuente muy gruesa para que se noten las rayas */
+    font-family: 'Arial Black', 'Arial', sans-serif !important;
+    font-weight: 900;
+    font-size: 4rem; /* Grande para apreciar el detalle */
+    text-transform: uppercase;
+    letter-spacing: -2px; /* Letras juntas */
+
+    /* 1. EL TRUCO DE LAS RAYAS (PERSIANA) */
+    /* Creamos un fondo que se repite: Color -> Transparente -> Color */
+    background-image: repeating-linear-gradient(
+        180deg,
+        #00ffaa 0px,      /* Empieza el color Verde-Azulado */
+        #00ffaa 6px,      /* Mantiene el color por 6 pixeles */
+        transparent 6px,  /* CORTE: Se vuelve transparente */
+        transparent 9px   /* Mantiene transparente por 3 pixeles */
+    );
+
+    /* 2. RECORTE DEL TEXTO */
+    /* Esto hace que las rayas solo aparezcan dentro de las letras */
+    background-clip: text;
+    -webkit-background-clip: text;
+    
+    /* Hacemos el color de la letra transparente para ver el fondo rayado */
+    color: transparent; 
+    -webkit-text-fill-color: transparent;
+
+    /* 3. GLOW / RESPLANDOR DIGITAL */
+    /* Usamos drop-shadow porque text-shadow no funciona bien con texto transparente */
+    filter: drop-shadow(0 0 5px rgba(0, 255, 170, 0.8));
+
+    position: relative;
+    z-index: 10;
+    
+    /* Un poco de estiramiento horizontal como en la imagen */
+    transform: scaleX(1.1);
+}
+
+/* Agrega esta animación al final de tu CSS si no la tienes */
+@keyframes textFlicker {
+    0% { opacity: 1; text-shadow: 0 0 15px red; }
+    100% { opacity: 0.8; text-shadow: 0 0 5px darkred; }
+}
+
+/* --- 1. ANIMACIÓN BURBUJAS (FLOTAR) --- */
+@keyframes floatBubble {
+    0% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-15px) scale(1.05); }
+    100% { transform: translateY(0px) scale(1); }
+}
+
+.style-circle-btn {
+    /* ... tus estilos anteriores ... */
+    animation: floatBubble 4s ease-in-out infinite;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5); /* Sombra para profundidad */
+}
+
+/* Retrasos para que no se muevan todas igual */
+.style-item:nth-child(1) .style-circle-btn { animation-delay: 0s; }
+.style-item:nth-child(2) .style-circle-btn { animation-delay: 1s; }
+.style-item:nth-child(3) .style-circle-btn { animation-delay: 0.5s; }
+.style-item:nth-child(4) .style-circle-btn { animation-delay: 1.5s; }
+
+
+/* --- 2. BOTONERA DE TV ANTIGUA (CHANNEL SELECTOR) --- */
+.tv-channel-bar {
+    background: #1a1a1a;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 2px solid #333;
+    border-bottom: 4px solid #000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    display: inline-flex;
+    gap: 10px;
+}
+
+.tv-btn {
+    width: 40px;
+    height: 40px;
+    background: #2b2b2b;
+    border: 2px solid #555;
+    border-top-color: #777;
+    border-left-color: #777;
+    border-bottom-color: #111;
+    border-right-color: #111;
+    color: #888;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Efecto al presionar (Active / Click) */
+.tv-btn:active {
+    transform: translateY(2px);
+    border-top-color: #111;
+    border-left-color: #111;
+    border-bottom-color: #333;
+    border-right-color: #333;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.8);
+}
+
+/* Estado ACTIVO (Canal Seleccionado) */
+.tv-btn.channel-active {
+    background: #222;
+    transform: translateY(2px); /* Se queda hundido */
+    border: 2px solid #111;
+    box-shadow: inset 2px 2px 10px black;
+    color: #00ffaa; /* Texto verde neón */
+    text-shadow: 0 0 5px #00ffaa;
+}
+
+/* Luz indicador (pequeña barra verde debajo) */
+.tv-btn.channel-active::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    width: 60%;
+    height: 3px;
+    background: #00ffaa;
+    box-shadow: 0 0 5px #00ffaa;
+    border-radius: 2px;
+}
+
+/* =========================================
+   ESTILOS DE LAS BURBUJAS (VISOR INMERSIVO)
+   ========================================= */
+
+.style-item {
+    position: relative; /* Necesario para centrar el texto dentro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px; /* Espacio entre burbujas */
+}
+
+/* 1. EL CONTENEDOR REDONDO */
+.style-circle-btn {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.5);
+    background: #000;
+    cursor: pointer;
+    overflow: hidden;
+    
+    /* CLAVE PARA EL CENTRADO: */
+    position: relative !important; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Animación */
+    animation: floatBubble 6s ease-in-out infinite;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    transition: all 0.4s ease;
+}
+
+/* 2. LA IMAGEN DE FONDO */
+.style-circle-btn img {
+    /* La sacamos del flujo normal para que no estorbe al texto */
+    position: absolute !important;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    
+    /* Filtro oscuro para que el texto blanco resalte */
+    filter: brightness(0.5) grayscale(30%);
+    transition: 0.5s;
+    z-index: 1; /* Al fondo */
+}
+
+/* 3. EL TEXTO (TÍTULO) */
+.style-label {
+    /* Lo forzamos al centro por encima de la imagen */
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    
+    z-index: 10; /* Encima de la imagen */
+    width: 90%;
+    text-align: center;
+    
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.1rem; /* Texto grande */
+    color: white;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.9); /* Sombra negra para leerse bien */
+    pointer-events: none;
+    line-height: 1.4;
+}
+
+/* EFECTO HOVER */
+.style-circle-btn:hover {
+    transform: scale(1.1);
+    border-color: #00ffaa;
+    box-shadow: 0 0 40px rgba(0, 255, 170, 0.5);
+}
+.style-circle-btn:hover img {
+    filter: brightness(0.3); /* Más oscuro al pasar el mouse */
+    transform: scale(1.1);
+}
+.style-circle-btn:hover .style-label {
+    color: #00ffaa;
+    text-shadow: 0 0 15px #00ffaa;
+}
+/* --- ANIMACIÓN FLOTAR --- */
+@keyframes floatBubble {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Retrasos para que se muevan disparejas (más orgánico) */
+.style-item:nth-child(1) .style-circle-btn { animation-delay: 0s; }
+.style-item:nth-child(2) .style-circle-btn { animation-delay: 1.5s; }
+.style-item:nth-child(3) .style-circle-btn { animation-delay: 0.8s; }
+.style-item:nth-child(4) .style-circle-btn { animation-delay: 2.2s; }
+
+/* --- RESPONSIVE (CELULAR) --- */
+@media(max-width: 768px){
+    /* En celular las hacemos un poco más chicas pero legibles */
+    .style-circle-btn { width: 160px; height: 160px; }
+    .style-label { font-size: 0.7rem; }
+    .style-item { margin: 10px; }
+}
+
+/* Botón de APAGAR (Power Off) */
+.tv-btn.power-off {
+    border-color: #500;
+    color: #ff5555;
+    background: #2a0000;
+    font-weight: bold;
+}
+
+.tv-btn.power-off:hover {
+    background: #ff0000;
+    color: white;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+.tv-btn.power-off:active {
+    transform: translateY(2px);
+    box-shadow: inset 0 0 5px black;
+}
+
+/* --- PECERA: FONDO Y POSICIONAMIENTO --- */
+#fishTank {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    /* Aseguramos que el contenedor base permita capas */
+    z-index: 0; 
+}
+#fishTank {
+    width: 100%; height: 100%; min-height: 500px;
+    display: block; position: relative;
+}
+/* --- DECORACIÓN: CORALES (FONDO) --- */
+/* --- DECORACIÓN: CORALES (FONDO) --- */
+/* --- DECORACIÓN: CORALES (AJUSTE "SIN CORTES") --- */
+.coral-decor {
+    position: absolute;
+    /* CAMBIO CLAVE: Los bajamos mucho (-50px) para esconder la base plana */
+    bottom: -50px; 
+    z-index: 1; 
+    pointer-events: none;
+    
+    /* Mantenemos el color "acuático" pero quitamos brillos excesivos */
+    opacity: 0.9; 
+    filter: brightness(0.6) contrast(1.2) hue-rotate(15deg) drop-shadow(0 0 10px rgba(0,0,0,0.8));
+    
+    transition: transform 0.5s ease;
+}
+
+/* Coral Izquierdo */
+.coral-left {
+    left: -8%; /* Lo pegamos más a la orilla */
+    /* Aumentamos el tamaño para compensar que lo bajamos */
+    height: 75%; 
+    width: auto;
+    transform: rotate(5deg);
+}
+
+/* Coral Derecho */
+.coral-right {
+    right: -8%;
+    height: 80%; /* Más grande para tapar bien la esquina */
+    width: auto;
+    transform: rotate(-5deg);
+}
+
+/* Coral Centro (FONDO) */
+.coral-center {
+    left: 25%; /* Ajustamos posición */
+    
+    /* Lo bajamos MÁS todavía porque suele ser más corto */
+    bottom: -40px; 
+    
+    height: 55%; /* Tamaño medio */
+    width: auto;
+    
+    /* SIN BLUR (NITIDO) */
+    /* Solo bajamos un poco el brillo para que se entienda que está atrás, pero se ve clarito */
+    filter: brightness(0.5) contrast(1.1) hue-rotate(15deg); 
+    
+    z-index: 0; /* Detrás de los otros */
+}
+
+/* Animación suave (Marea) */
+.coral-decor {
+    animation: sway 7s ease-in-out infinite alternate;
+}
+
+@keyframes sway {
+    0% { transform: rotate(0deg) translateX(0); }
+    100% { transform: rotate(3deg) translateX(8px); }
+}
+
+/* --- PEZ (MODELO) --- */
+/* Asegúrate que tu script JS le ponga una clase o ID al pez, 
+   o que el canvas del pez tenga un z-index alto por defecto. 
+   Si es un canvas generado por ripples/script.js, suele tener z-index: 0. 
+   Necesitamos forzar que esté EN FRENTE. */
+#fishTank canvas, .fish-model { 
+    z-index: 10 !important; /* CAPA 10: El pez va al frente */
+    position: relative;
+}
+
+/* --- BURBUJAS (EFECTO CRISTAL GRANDE) --- */
+#bubbles-container {
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    z-index: 5; /* CAPA 5: Entre los corales y el pez */
+    pointer-events: none;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -50px;
+    border-radius: 50%;
+    
+    /* ESTILO CRISTAL: Transparente con borde brillante */
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05) 60%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.1);
+    
+    opacity: 0;
+    animation: riseUp var(--duration) ease-in infinite;
+    animation-delay: var(--delay);
+}
+
+@keyframes riseUp {
+    0% {
+        bottom: -50px;
+        opacity: 0;
+        transform: translateX(0) scale(1);
+    }
+    20% {
+        opacity: 0.6; /* Se ven sutilmente */
+    }
+    50% {
+        transform: translateX(var(--sway)) scale(1.1);
+    }
+    100% {
+        bottom: 110%;
+        opacity: 0;
+        transform: translateX(calc(var(--sway) * -1)) scale(1.2);
+    }
+}
+
+/* =========================================
+   NUEVO ESTILO VR - Y2K CURSOR TRACKING
+   ========================================= */
+
+/* --- TÍTULO --- */
+.vr-main-title {
+    font-family: 'Fredoka', sans-serif; /* O 'Sora' */
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 0 4px 0 #000, 0 0 20px rgba(0, 255, 170, 0.5);
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+@media(min-width: 768px) {
+    .vr-main-title { font-size: 2.5rem; }
+}
+
+/* --- TARJETA DEL PRODUCTO (ABAJO) --- */
+/* Estilo Y2K: Plateado/Azuloso con borde sólido */
+.y2k-card-compact {
+    background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(200,220,255,0.8) 100%);
+    border: 3px solid #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: left;
+    box-shadow: 
+        0 10px 20px rgba(0,0,0,0.5), 
+        inset 0 0 15px rgba(255,255,255,0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decoración superior de la tarjeta (Mac OS viejo / Winamp) */
+.y2k-header-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 2px solid #a6c1ff;
+    padding-bottom: 8px; margin-bottom: 15px;
+}
+.y2k-pill {
+    background: #ff00ff; color: white;
+    font-family: 'Press Start 2P'; font-size: 0.5rem;
+    padding: 4px 8px; border-radius: 10px;
+}
+
+.y2k-title {
+    font-family: 'Sora', sans-serif; font-weight: 800;
+    color: #0044cc; font-size: 1.4rem; margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.y2k-desc {
+    font-size: 0.8rem; color: #445577; line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.y2k-price-row {
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(0,0,0,0.05); padding: 10px; border-radius: 12px;
+}
+
+.btn-y2k-go {
+    background: #0044cc; color: white; border: none;
+    font-family: 'Press Start 2P'; font-size: 0.6rem;
+    padding: 10px 15px; cursor: pointer; border-radius: 5px;
+    box-shadow: 3px 3px 0 #002266; transition: 0.2s;
+}
+.btn-y2k-go:active { transform: translate(3px, 3px); box-shadow: none; }
+
+/* --- ZONA DE CONTROLES --- */
+.vr-controls-area {
+    width: 100%;
+    /* En móvil centrado (por defecto en bootstrap d-flex), en PC a la derecha */
+}
+
+/* Ajuste para que las flechas no sean gigantescas, sino acordes a la tarjeta */
+.vr-nav-btn {
+    background: transparent;
+    border: none;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem; /* Un poco más chicas para que no compitan tanto */
+    color: #ff3b3b; /* Rojo Y2K */
+    text-shadow: 2px 2px 0px #500000;
+    cursor: pointer;
+    transition: transform 0.2s;
+    z-index: 20;
+    padding: 0 10px; /* Espacio para clicar */
+}
+
+.vr-nav-btn:hover {
+    transform: scale(1.2);
+    color: #ff6666;
+}
+
+/* --- EFECTOS DE FONDO --- */
+.vr-overlay-effects {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 5;
+}
+
+/* =========================================
+   SECCIÓN SOBRE NOSOTROS - FRUTIGER AERO
+   ========================================= */
+
+.frutiger-section {
+    min-height: 80vh; /* Altura considerable */
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* Fondo base Cielo */
+    background: linear-gradient(
+        180deg, 
+        #00609c 0%,   /* Azul Agua Intenso (Superficie) */
+        #003366 100%  /* Azul Marino Oscuro (Hacia el fondo) */
+    ) !important;
+    z-index: 5;
+    padding: 50px 0;
+}
+
+/* Fondo Aurora (Luces suaves) */
+.frutiger-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(144, 238, 144, 0.4) 0%, transparent 40%);
+    filter: blur(40px);
+}
+
+/* =========================================
+   ORBES: ESTILO BURBUJA REALISTA
+   ========================================= */
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    
+    /* 1. TRANSPARENCIA TOTAL */
+    /* Quitamos el blanco sólido. Solo dejamos un brillo sutil arriba a la izquierda */
+    background: radial-gradient(
+        circle at 30% 30%, 
+        rgba(255, 255, 255, 0.2), /* Brillo especular */
+        rgba(255, 255, 255, 0.01) 60% /* Centro transparente */
+    ) !important;
+    
+    /* 2. BORDE FINO */
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    
+    /* 3. REFLEJOS */
+    /* Brillo interno y una sombra muy suave */
+    box-shadow: 
+        inset 0 0 15px rgba(255, 255, 255, 0.1),
+        0 5px 15px rgba(0, 0, 0, 0.1) !important;
+    
+    /* 4. DISTORSIÓN (EFECTO LUPA) */
+    backdrop-filter: blur(2px); /* Desenfoca un poco lo que hay detrás */
+    
+    /* Mantenemos tu animación de flotar */
+    animation: floatOrb 10s infinite ease-in-out;
+}
+.orb-1 { width: 150px; height: 150px; top: 10%; right: 10%; animation-delay: 0s; }
+.orb-2 { width: 80px; height: 80px; bottom: 20%; left: 10%; animation-delay: -5s; }
+
+.frutiger-glass-card {
+    /* --- TU ESTILO ORIGINAL (.glass) --- */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4) !important; /* Sombra más fuerte */
+    background: rgba(255, 255, 255, 0.05) !important; /* Un poco más transparente */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 10px ridge rgba(255, 255, 255, 0.18); /* Tu borde característico */
+    
+    /* Ajustes de posición */
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+}
+
+/* Logo */
+.frutiger-logo {
+    width: 220px;
+    height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+    animation: floatOrb 6s ease-in-out infinite; /* Reutilizamos animación */
+}
+
+/* Tipografía */
+.frutiger-subtitle {
+    font-family: 'Fredoka', sans-serif;
+    color: #005f99; /* Azul oscuro */
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.frutiger-title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    
+    /* Degradado */
+    background: linear-gradient(180deg, #ffffff 20%, #e0f7ff 100%);
+    
+    /* 1. Propiedad Estándar (Para que el editor no se queje) */
+    background-clip: text;
+    
+    /* 2. Propiedad Webkit (Necesaria para que Chrome/Edge/Safari hagan la magia) */
+    -webkit-background-clip: text;
+    
+    /* 3. Hacer el texto transparente para ver el fondo */
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback estándar opcional */
+    
+    filter: drop-shadow(0 2px 5px rgba(0, 100, 200, 0.3));
+}
+
+.frutiger-text {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.1rem;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    line-height: 1.6;
+}
+
+/* BOTÓN DE GEL (ICONICO DEL ESTILO) */
+.btn-gel {
+    display: inline-block;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 1.1rem;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
+    
+    /* El degradado Gel */
+    background: linear-gradient(180deg, #81e649 0%, #46b300 50%, #348500 100%);
+    box-shadow: 
+        0 5px 15px rgba(52, 133, 0, 0.4),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+    
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Brillo superior del botón (el reflejo) */
+.btn-gel::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.1) 100%);
+    border-radius: 50px 50px 20px 20px;
+    pointer-events: none;
+}
+
+.btn-gel:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 10px 20px rgba(52, 133, 0, 0.5),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+    color: white;
+}
+
+/* Animaciones */
+@keyframes floatOrb {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+@keyframes shineWindow {
+    0% { transform: translateX(-150%) translateY(-150%); }
+    100% { transform: translateX(150%) translateY(150%); }
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+    .frutiger-title { font-size: 2.2rem; }
+    .frutiger-logo { width: 150px; }
+}
+/* =========================================
+   NUEVO BOTÓN HERO Y ESLOGAN
+   ========================================= */
+
+/* 1. ESLOGAN DE SISTEMA */
+.system-msg {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 0px #000;
+    padding: 5px 10px;
+}
+
+/* Animación del cursor > */
+.blink { animation: blinker 1s linear infinite; }
+@keyframes blinker { 50% { opacity: 0; } }
+
+
+/* =========================================
+   BOTÓN CYBERCORE: PLATA Y CRISTAL (CHROME)
+   ========================================= */
+
+.btn-cyber-chrome {
+    position: relative;
+    display: inline-block;
+    padding: 16px 45px;
+    text-decoration: none;
+    
+    /* FORMA: Pastilla futurista */
+    border-radius: 50px;
+    
+    /* FONDO: Cristal Oscuro (Base) */
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    
+    /* BORDE: Plateado Brillante */
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    
+    /* SOMBRAS: Resplandor blanco/hielo (Cybercore) */
+    box-shadow: 
+        0 0 15px rgba(255, 255, 255, 0.2), /* Glow externo suave */
+        inset 0 0 20px rgba(255, 255, 255, 0.1); /* Brillo interno */
+        
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: url('../recursos/mano-pixel.png'), pointer;
+    overflow: hidden;
+}
+
+/* TEXTO: Efecto Metálico */
+.btn-cyber-chrome .chrome-text {
+    font-family: 'Sora', sans-serif; /* Más técnico que pixelado */
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    position: relative;
+    z-index: 10;
+    transition: color 0.3s;
+}
+
+/* DECORACIÓN: El reflejo "Cromo" que pasa */
+.chrome-glare {
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.8), 
+        transparent
+    );
+    transform: skewX(-25deg);
+    transition: 0.5s;
+}
+
+/* --- ESTADO HOVER (AL PASAR EL MOUSE) --- */
+/* Se convierte en PLATA LÍQUIDA SÓLIDA */
+.btn-cyber-chrome:hover {
+    /* Degradado Metálico Vertical */
+    background: linear-gradient(
+        180deg, 
+        #ffffff 0%, 
+        #e0e0e0 40%, 
+        #a0a0a0 50%, /* Horizonte metálico */
+        #d0d0d0 100%
+    );
+    
+    border-color: #fff;
+    
+    /* Glow intenso blanco */
+    box-shadow: 
+        0 0 30px rgba(255, 255, 255, 0.6),
+        0 0 60px rgba(166, 193, 255, 0.4); /* Un toque azul hielo */
+        
+    transform: scale(1.05);
+}
+
+.btn-cyber-chrome:hover .chrome-text {
+    color: #000; /* Texto negro para contrastar con la plata */
+    text-shadow: none;
+}
+
+.btn-cyber-chrome:hover .chrome-glare {
+    left: 100%; /* El brillo cruza rápido */
+    transition: 0.4s;
+}
+
+/* --- ESTADO CLICK --- */
+.btn-cyber-chrome:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* =========================================
+   FOOTER - CYBER PANEL REDESIGN
+   ========================================= */
+
+.cyber-footer {
+    background-color: #000;
+    border-top: 2px solid #00ffaa;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Fondo Cuadriculado más visible */
+.cyber-grid-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 255, 170, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 170, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.4;
+    z-index: 0;
+}
+
+/* El Marco del Panel (La caja gris oscura) */
+.cyber-panel {
+    background: rgba(10, 20, 30, 0.8);
+    border: 1px solid #333;
+    border-left: 5px solid #00ffaa; /* Detalle lateral estético */
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+}
+
+/* Títulos y Textos */
+.footer-brand {
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 2px 2px 0 #333;
+}
+
+.footer-txt {
+    font-family: 'Sora', sans-serif;
+    color: #8899aa;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.system-badge {
+    display: inline-block;
+    background: #002211;
+    border: 1px solid #00ffaa;
+    color: #00ffaa;
+    font-family: monospace;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+}
+
+/* Enlaces estilo Terminal */
+.footer-head {
+    font-size: 0.8rem;
+    color: #fff;
+    border-bottom: 2px solid #333;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.footer-menu li { margin-bottom: 10px; }
+
+.term-link {
+    text-decoration: none;
+    color: #8899aa;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
+    transition: 0.3s;
+    display: block;
+}
+
+.term-link:hover {
+    color: #00ffaa;
+    transform: translateX(10px);
+    text-shadow: 0 0 8px #00ffaa;
+}
+
+/* BOTONES SOCIALES NEÓN */
+.social-grid {
+    display: flex; gap: 15px; flex-wrap: wrap;
+}
+
+.cyber-icon-btn {
+    width: 45px; height: 45px;
+    display: flex; align-items: center; justify-content: center;
+    background: #000;
+    border: 1px solid #333;
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto Hover Específico por Red */
+.cyber-icon-btn:hover {
+    transform: translateY(-5px) scale(1.1);
+    color: #fff;
+    border-color: white;
+}
+
+/* Colores Neón al pasar el mouse */
+.instagram:hover { 
+    box-shadow: 0 0 15px #d62976; 
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); 
+}
+.tiktok:hover { 
+    box-shadow: 0 0 15px #00f2ea; 
+    background: linear-gradient(45deg, #00f2ea, #ff0050); 
+}
+.twitter:hover { 
+    box-shadow: 0 0 15px #ffffff; 
+    background: #000; border-color: #fff; 
+}
+.whatsapp:hover { 
+    box-shadow: 0 0 15px #25D366; 
+    background: #25D366; 
+}
+
+/* Copyright area */
+.footer-bottom { border-top-color: rgba(255,255,255,0.1) !important; }
+
+/* =========================================
+   BOTÓN VOLVER ARRIBA (CYBER STYLE)
+   ========================================= */
+#btn-back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    
+    /* Diseño Cuadrado/Tecnológico */
+    width: 45px;
+    height: 45px;
+    background: #000;
+    border: 1px solid #00ffaa;
+    color: #00ffaa;
+    
+    /* Centrado del ícono */
+    display: none; /* JS lo activa al bajar */
+    align-items: center;
+    justify-content: center;
+    
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000; /* Siempre encima de todo */
+    box-shadow: 0 0 10px rgba(0, 255, 170, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Efecto Hover: Se llena de luz */
+#btn-back-to-top:hover {
+    background: #00ffaa;
+    color: #000;
+    box-shadow: 
+        0 0 20px #00ffaa,
+        0 0 40px rgba(0, 255, 170, 0.4);
+    transform: translateY(-5px); /* Flota un poco */
+}
+
+/* Efecto Click */
+#btn-back-to-top:active {
+    transform: scale(0.9);
+}
+
+/* =========================================
+   BOTONES FLOTANTES: FAB WRAPPER (CORREGIDO)
+   ========================================= */
+
+/* 1. EL CONTENEDOR (Controla la posición en pantalla) */
+.fab-wrapper {
+    position: fixed;
+    bottom: 30px; /* Un poco más arriba del borde */
+    right: 20px;
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    gap: 15px; /* Espacio entre los botones */
+    z-index: 99999 !important;
+    pointer-events: none; /* Permite clickear a través del área vacía del wrapper */
+}
+
+/* 2. LA BURBUJA (El estilo del botón) */
+.bubble-fab {
+    /* IMPORTANTE: position relative para que obedezca al flex-direction column */
+    position: relative !important; 
+    bottom: auto !important; /* Anulamos cualquier bottom heredado */
+    right: auto !important;  /* Anulamos cualquier right heredado */
+    
+    pointer-events: auto; /* Reactivamos clicks en el botón */
+    
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%;
+    
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    
+    background: rgba(20, 20, 20, 0.85); /* Fondo más oscuro para evitar transparencia confusa */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    margin: 0 !important; /* Asegura que no haya márgenes extraños */
+}
+
+/* --- ESTILOS ESPECÍFICOS --- */
+
+/* Botón SUBIR (Verde) */
+#btn-back-to-top {
+    color: #00ffaa;
+    border-color: rgba(0, 255, 170, 0.5);
+    /* JS controla el display: flex/none */
+}
+#btn-back-to-top:hover {
+    background: rgba(0, 255, 170, 0.2);
+    box-shadow: 0 0 20px #00ffaa;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+/* Botón PWA (Azul) */
+#pwa-install-btn {
+    color: #4facfe;
+    border-color: rgba(79, 172, 254, 0.5);
+}
+#pwa-install-btn:hover {
+    background: rgba(79, 172, 254, 0.2);
+    box-shadow: 0 0 20px #4facfe;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   MODAL DE COMPRA (ESTILO CYBER-CARRITO)
+   ========================================= */
+
+/* 1. CONTENEDOR PRINCIPAL (Igual al fondo del carrito) */
+#modalCompraExitosa .modal-content {
+    background: linear-gradient(to bottom, rgba(10, 26, 58, 0.98), rgba(5, 10, 20, 0.99));
+    border: 2px solid #4a76fd; /* Azul Eléctrico */
+    box-shadow: 0 0 50px rgba(74, 118, 253, 0.3); /* Resplandor Azul */
+    border-radius: 12px;
+}
+
+/* 2. CABECERA (Transparencia azulada) */
+#modalCompraExitosa .modal-header {
+    background: rgba(74, 118, 253, 0.15);
+    border-bottom: 1px solid #4a76fd;
+}
+
+#modalCompraExitosa .modal-title {
+    color: #fff;
+    text-shadow: 0 0 10px #4a76fd;
+}
+
+#modalCompraExitosa .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%); /* Hacer la X blanca */
+}
+
+/* 3. ITEMS DE DESCARGA (Igual a .cyber-list-item del carrito) */
+.download-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid #4a76fd; /* Borde Azul */
+    border-left: 4px solid #00ffaa; /* Detalle Verde de éxito */
+    margin-bottom: 12px;
+    border-radius: 8px;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.download-item:hover {
+    transform: translateX(5px);
+    background: rgba(74, 118, 253, 0.1);
+    box-shadow: 0 0 15px rgba(74, 118, 253, 0.2);
+}
+
+/* 4. BOTÓN "BAJAR" (Estilo botón pequeño del carrito) */
+.btn-download-link {
+    background: transparent;
+    border: 1px solid #00ffaa;
+    color: #00ffaa;
+    font-family: 'Press Start 2P';
+    font-size: 0.6rem;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn-download-link:hover {
+    background: #00ffaa;
+    color: #000;
+    box-shadow: 0 0 10px #00ffaa;
+}
+
+/* 5. FOOTER Y BOTÓN FINAL (Estilo Terminal) */
+#modalCompraExitosa .modal-footer {
+    border-top: 1px solid #4a76fd;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================
+   BOTÓN FLOTANTE CARRITO (TOP-RIGHT SILVER) - FIXED
+   ========================================= */
+
+#fab-cart-top {
+    /* 1. FUERZA BRUTA DE POSICIÓN (Rompe el candado anterior) */
+    position: fixed !important; 
+    top: 30px !important;    /* Espacio desde arriba */
+    right: 30px !important;  /* Espacio desde la derecha */
+    left: auto !important;   /* Anula cualquier alineación izquierda */
+    bottom: auto !important; /* Anula alineación inferior */
+    
+    z-index: 99999 !important; /* Siempre visible */
+    
+    /* 2. ESTILO PLATA / CROMO (Cybercore) */
+    /* Fondo negro semitransparente para contraste */
+    background: rgba(10, 10, 10, 0.7) !important; 
+    
+    /* Borde y color blanco/plata */
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    color: #ffffff !important;
+    
+    /* Resplandor blanco sutil */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15) !important;
+    
+    /* Aseguramos que se muestre y centre */
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    
+    /* Anulamos márgenes extraños */
+    margin: 0 !important;
+}
+
+/* EFECTO HOVER (AL PASAR EL MOUSE) */
+#fab-cart-top:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: #ffffff !important;
+    color: #fff !important;
+    
+    /* Glow intenso plateado */
+    box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.6),
+        inset 0 0 10px rgba(255, 255, 255, 0.2) !important;
+        
+    transform: scale(1.1);
+}
+
+/* AJUSTE MÓVIL (Para que no tape el menú) */
+@media (max-width: 991px) {
+    #fab-cart-top {
+        top: 20px !important;
+        right: 70px !important; /* A la izquierda del menú hamburguesa */
+        width: 45px !important;
+        height: 45px !important;
+    }
+}
+
+/* Agrega o verifica esto en .fab-wrapper y #fab-cart-top */
+.fab-wrapper, #fab-cart-top {
+    transition: opacity 0.3s ease, transform 0.3s ease !important;
+}
+
+/* Clase auxiliar para ocultarlos */
+.fab-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important; /* Evita que les des clic por error estando invisibles */
+}
+/* FORZAR CURSOR EN EL CARRUSEL */
+.swiper-wrapper {
+    /* Usamos tu mano pixelada como prioridad */
+    cursor: url('../recursos/mano-pixel.png'), grab !important;
+}
+
+/* Cuando el usuario hace click y arrastra (Grabbing) */
+.swiper-wrapper:active {
+    cursor: url('../recursos/mano-pixel.png'), grabbing !important;
+}
+
+/* =========================================
+   FLECHAS DEL CARRUSEL DE PRODUCTOS (ENGROSADAS)
+   ========================================= */
+
+/* Estilo base para ambas flechas */
+.swiper-button-next,
+.swiper-button-prev {
+    /* Asegura que usen la fuente de iconos */
+    font-family: 'bootstrap-icons' !important;
+    
+    /* 1. Grosor mediante peso de fuente (Puede que no funcione en todas) */
+    font-weight: 900 !important; 
+    
+    /* 2. TRUCO CLAVE: Stroke al texto para engrosar visualmente */
+    /* 1px de borde del mismo color hace que se vea "bold" */
+    -webkit-text-stroke: 1px #00ffaa; 
+    
+    /* Color base */
+    color: #00ffaa !important;
+    
+    /* Tamaño */
+    font-size: 2rem !important; /* Ajusta si las quieres más grandes/chicas */
+    
+    /* Efecto de brillo para que resalten más */
+    text-shadow: 0 0 10px rgba(0, 255, 170, 0.6);
+    
+    /* Animación suave */
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse (Crecen y brillan más) */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    transform: scale(1.2);
+    text-shadow: 0 0 20px rgba(0, 255, 170, 1);
+    -webkit-text-stroke: 1.5px #00ffaa; /* Se engrosan un poquito más al hover */
+}
+
+/* Ajuste específico para los iconos de Bootstrap 5 */
+/* A veces Swiper usa ::after para el icono, esto asegura que se aplique */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-weight: 900 !important;
+    /* Si Swiper usa font-size en rem, esto lo anula */
+    font-size: 2rem !important; 
+}
+
+@media (max-width: 991px) {
+    /* Fuerza los items del menú a alinearse a la izquierda */
+    .navbar-nav {
+        align-items: flex-start !important; /* Anula el 'align-items-center' del HTML */
+        text-align: left !important;
+        padding-left: 15px; /* Un pequeño margen para que no pegue al borde */
+    }
+    
+    /* Asegura que el enlace ocupe todo el ancho (opcional, mejora el clic) */
+    .nav-item {
+        width: 100%;
+    }
+}
+
+/* =========================================
+   FIX FINAL: SEPARACIÓN DE PANELES EN MÓVIL
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    #fab-cart-top {
+        position: fixed !important;
+        top: 20px !important;
+        right: 20px !important;
+        
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 1.2rem !important;
+        
+        background: rgba(0, 0, 0, 0.9) !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 50% !important;
+        
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000 !important; /* Encima de todo */
+        box-shadow: 0 0 15px rgba(0, 255, 170, 0.3) !important;
+    }
+
+   #tv-controls-container {
+        /* 1. EL TRUCO PARA SUBIRLOS */
+        /* Usamos margin-top negativo para "tirar" de ellos hacia arriba */
+        margin-top: -130px !important; 
+        
+        /* 2. ESPACIO DE SEGURIDAD ABAJO */
+        /* Mantenemos un margen abajo para que el título "Y2K" no se pegue */
+        margin-bottom: 30px !important;
+
+        /* Propiedades base para que no se rompa la alineación */
+        position: relative !important;
+        display: flex !important;
+        justify-content: center !important;
+        z-index: 50 !important;
+    }
+    #visor-inmersivo {
+        /* ANTES: height: 100vh (Altura fija) */
+        /* AHORA: height: auto (Crece según el contenido) */
+        height: auto !important; 
+        
+        /* Aseguramos que al menos cubra la pantalla, pero si necesita más, crece */
+        min-height: 120vh !important; 
+        
+        /* Le damos permiso de hacer scroll si es necesario */
+        overflow-y: visible !important;
+        
+        /* Un poco más de espacio abajo del todo */
+        padding-bottom: 50px !important;
+    }
+
+    /* 2. DAME AIRE ABAJO DE LA TARJETA */
+    #products-ui {
+        /* Aumentamos el colchón inferior para que la tarjeta no toque el borde */
+        padding-bottom: 100px !important; 
+    }
+    /* 2. EL CONTENEDOR DE ABAJO (FILTROS Y TARJETA) */
+    #products-ui {
+        position: relative !important;
+        inset: auto !important;
+        height: auto !important;
+        
+        /* AQUÍ ESTÁ LA MAGIA: Margin top para separarlo de la botonera */
+        margin-top: 0px !important; 
+        padding-top: 10px !important;
+        
+        /* Tu petición de espacio abajo (pequeño) */
+        padding-bottom: 40px !important; 
+    }
+
+    /* 3. LOS BOTONES VERDES (FILTROS) */
+    /* Forzamos que bajen si no caben y se centren */
+    #products-ui .d-flex.gap-2 {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        margin-bottom: 20px !important; /* Espacio antes de la tarjeta */
+    }
+
+    /* Ajuste de los botones individuales */
+    .filter-pill {
+        font-size: 0.75rem !important;
+        padding: 8px 16px !important;
+    }
+
+    /* 4. TÍTULO "Y2K" (O EL QUE TOQUE) */
+    #style-title {
+        text-align: center;
+        font-size: 1.5rem !important;
+        margin-top: 10px;
+    }
+
+    /* --- ARREGLO BURBUJAS EN MÓVIL --- */
+    .style-circle-btn .style-label {
+        opacity: 1 !important; /* Texto siempre visible */
+        transform: translate(-50%, -50%) !important; /* Posición fija correcta */
+        font-size: 0.8rem !important; /* Tamaño ajustado */
+        width: 100%;
+        padding: 0 5px;
+    }
+
+    /* Oscurecer la imagen siempre para que el texto blanco se lea */
+    .style-circle-btn img {
+        filter: brightness(0.4) !important; 
+    }
+}
+
+/* =========================================
+   15. AJUSTES COLORES FOOTER
+   ========================================= */
+
+/* 1. EL TEXTO "NOSTALGY.CORE INC" A BLANCO */
+.footer-bottom p, 
+.footer-bottom .text-muted {
+    color: #ffffff !important; /* Blanco puro */
+    opacity: 1 !important;     /* Quitamos el efecto apagado */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Opcional: un brillito suave */
+}
+
+/* 2. LA LÍNEA VERTICAL (IZQUIERDA) */
+.cyber-panel {
+    /* Actualmente es verde (#00ffaa). 
+       Si la quieres BLANCA, cambia a: #ffffff */
+    border-left-color: #00ffaa !important; 
+}
+
+/* 3. LA LÍNEA HORIZONTAL (SEPARADOR) */
+/* Actualmente casi invisible. Vamos a ponerla del color que quieras */
+.footer-bottom {
+    /* ¿Quieres que sea verde neón también? */
+    border-top-color: #00ffaa !important; 
+    
+    /* O si la prefieres blanca sutil, usa esto:
+    border-top-color: rgba(255, 255, 255, 0.3) !important; 
+    */
+}
+
+/* =========================================
+   17. UNIFICACIÓN DE TIPOGRAFÍA (HIERARCHY)
+   ========================================= */
+
+/* --- 1. TÍTULOS GRANDES (FREDOKA) --- */
+/* Usamos la fuente redonda para títulos principales para dar el look "Aero" */
+h1, h2, h3, .display-5, .frutiger-title, .section-title, #style-title {
+    font-family: 'Fredoka', sans-serif !important;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* --- 2. TEXTOS DE INTERFAZ & BOTONES (PIXEL - PRESS START 2P) --- */
+/* Mantenemos lo retro solo en botones y elementos de "sistema" */
+.btn, 
+.nav-link-retro, 
+.badge, 
+.y2k-pill, 
+.system-msg,
+.tv-btn,
+.filter-pill,
+.cyber-tag,
+.footer-head, /* Títulos pequeños del footer */
+.term-link,
+.system-badge {
+    font-family: 'Press Start 2P', cursive !important;
+    text-transform: uppercase;
+    font-size: 0.7rem; /* Ajuste para que no se vean gigantes */
+}
+
+/* --- 3. TEXTOS LARGOS & PÁRRAFOS (SORA) --- */
+/* Para leer cómodo sin cansarse la vista */
+p, 
+.footer-txt, 
+.frutiger-text, 
+.y2k-desc, 
+.cyber-body, 
+.toast-body,
+.form-control, /* Texto que escribe el usuario */
+input, 
+textarea {
+    font-family: 'Sora', sans-serif !important;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* --- EXCEPCIONES ESPECÍFICAS --- */
+
+/* El Logo del Menú (Nostalgy.Core) se ve mejor en Fredoka */
+.brand-text {
+    font-family: 'Fredoka', sans-serif !important;
+    font-weight: 700;
+}
+
+/* El Precio grande ($12) se ve bien en Sora (Futurista) o Pixel */
+.cyber-price {
+    font-family: 'Press Start 2P', cursive !important;
+}
+/* =========================================
+   18. AJUSTE POSICIÓN BOTONES TV (PC)
+   ========================================= */
+
+@media (min-width: 769px) {
+    #tv-controls-container {
+        /* Como la ola empujó todo 220px hacia abajo, 
+           nosotros subimos los botones para compensar. */
+        
+        /* Ajusta este número si los quieres más arriba o abajo */
+        top: -160px !important; 
+        
+        /* Aseguramos que se mantengan a la izquierda */
+        left: 0 !important;
+        margin-left: 20px !important; 
+    }
+}
+#tv-controls-container.d-none {
+    display: none !important;
+}
+
+/* =========================================
+   EFECTOS SUBMARINOS (SOPHISTICATED)
+   ========================================= */
+
+/* 1. RAYOS DE SOL (CAUSTICS) */
+/* Simula la luz moviéndose en el agua */
+.sun-rays {
+    position: absolute;
+    top: -50%; 
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right, 
+        rgba(0, 255, 170, 0) 0%,      /* Transparente */
+        rgba(0, 255, 170, 0.05) 50%,  /* Verde agua muy sutil */
+        rgba(0, 255, 170, 0) 100%     /* Transparente */
+    );
+    transform: rotate(20deg);
+    animation: shineMove 8s infinite linear;
+    pointer-events: none;
+    z-index: 1; /* Detrás del contenido */
+}
+
+@keyframes shineMove {
+    0% { transform: rotate(20deg) translateY(0); }
+    50% { transform: rotate(20deg) translateY(-20px) translateX(20px); }
+    100% { transform: rotate(20deg) translateY(0); }
+}
+
+
+@keyframes drift {
+    0% { background-position: 0 0, 40px 60px; }
+    100% { background-position: 0 200px, 40px 300px; } /* Caen lentamente */
+}
+
+/* 3. FLOTACIÓN DE LA TARJETA (NUEVA ANIMACIÓN) */
+/* Hacemos que la tarjeta central respire como si estuviera bajo el agua */
+.frutiger-glass-card {
+    /* Mantenemos tus estilos anteriores y agregamos la animación */
+    animation: underwaterFloat 6s ease-in-out infinite;
+}
+
+/* 2. PARTÍCULAS MARINAS (CORREGIDO: DE NIEVE A BURBUJAS) */
+.sea-particles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    
+    /* Puntos más suaves y dispersos */
+    background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(rgba(255, 255, 255, 0.2) 2px, transparent 2px);
+        
+    background-size: 50px 50px, 100px 100px;
+    background-position: 0 0, 20px 40px;
+    
+    /* CLAVE: Desenfoque para que parezca estar bajo el agua */
+    filter: blur(1px); 
+    
+    opacity: 0.4; 
+    
+    /* Animación mucho más lenta y hacia ARRIBA */
+    animation: underwaterDrift 30s linear infinite;
+    z-index: 1;
+}
+
+/* Nueva animación: Subir suavemente (Burbujas/Corriente) */
+@keyframes underwaterDrift {
+    0% { 
+        background-position: 0 1000px, 20px 800px; /* Empieza abajo */
+    }
+    100% { 
+        background-position: 0 0, 20px 0; /* Termina arriba */
+    }
+}
+
+/* =========================================
+   ANIMACIÓN FLOTANTE (RECUADRO)
+   ========================================= */
+
+/* 1. Asignar la animación a la tarjeta */
+.frutiger-glass-card {
+    /* Mueve la tarjeta en un ciclo infinito de 6 segundos */
+    animation: underwaterFloat 6s ease-in-out infinite !important;
+    
+    /* Aseguramos que los cambios de posición sean suaves */
+    transform-origin: center center;
+}
+
+/* 2. Definir cómo se mueve (Arriba/Abajo + Ligera rotación) */
+@keyframes underwaterFloat {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+    }
+    50% { 
+        /* Sube 15px y se inclina 1 grado (efecto corriente de agua) */
+        transform: translateY(-15px) rotate(1deg); 
+    }
+}
+
+/* =========================================
+   SECCIÓN CONTACTO: BIOLUMINISCENCIA REALISTA
+   ========================================= */
+
+#contacto {
+    /* 1. FONDO DE ARENA NEGRA/AGUA OSCURA */
+    background: linear-gradient(
+        180deg, 
+        #00050a 0%,   /* Azul negrusco arriba */
+        #000000 100%  /* Negro total abajo */
+    ) !important;
+    
+    position: relative;
+    z-index: 10;
+    
+    /* Ajustes de posición previos */
+    margin-top: -50px !important; 
+    padding-top: 100px !important;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* 2. CAPA DE PLANCTON (PUNTOS) */
+/* =========================================
+   LUCES ABISALES: SISTEMA DE DOS CAPAS
+   ========================================= */
+
+/* CAPA 1: PUNTITOS PEQUEÑOS (PLANCTON) */
+#contacto::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    
+    /* AQUÍ ESTÁ EL TRUCO:
+       Usamos muchísimos gradientes pequeños en posiciones aleatorias 
+       para simular el caos de la naturaleza */
+    background-image: 
+        /* Cúmulos grandes de luz (Brillo difuso) */
+        radial-gradient(circle at 15% 50%, rgba(0, 255, 234, 0.15), transparent 20%),
+        radial-gradient(circle at 85% 30%, rgba(0, 140, 255, 0.15), transparent 20%),
+        
+        /* Puntos NEÓN INTENSOS (El plancton) */
+        radial-gradient(2px 2px at 10% 10%, #00ffff, transparent),
+        radial-gradient(2px 2px at 20% 30%, #008cff, transparent),
+        radial-gradient(3px 3px at 40% 70%, #00ffff, transparent),
+        radial-gradient(2px 2px at 60% 20%, #00ffea, transparent),
+        radial-gradient(3px 3px at 80% 80%, #008cff, transparent),
+        radial-gradient(2px 2px at 90% 10%, #ffffff, transparent),
+        
+        /* Más puntos pequeños para rellenar (Ruido) */
+        radial-gradient(1px 1px at 15% 65%, #00ffff, transparent),
+        radial-gradient(1px 1px at 35% 85%, #00ffea, transparent),
+        radial-gradient(1px 1px at 75% 45%, #008cff, transparent);
+
+    /* Repetimos el patrón pero con un tamaño irregular para romper la cuadrícula */
+    background-size: 300px 300px, 400px 400px, 
+                     150px 150px, 150px 150px, 150px 150px, 
+                     150px 150px, 150px 150px, 150px 150px,
+                     100px 100px, 100px 100px, 100px 100px;
+    
+    /* Filtro para que brillen como neón */
+    filter: drop-shadow(0 0 5px #00ffea);
+    
+    /* Animación de parpadeo orgánico */
+    animation: bioPulse 5s ease-in-out infinite alternate;
+    opacity: 0.8; 
+    pointer-events: none;
+}
+
+
+/* 3. ANIMACIÓN ORGÁNICA */
+@keyframes bioPulse {
+    0% { opacity: 0.6; filter: drop-shadow(0 0 2px #00ffea); }
+    50% { opacity: 1; filter: drop-shadow(0 0 8px #00ffea); }
+    100% { opacity: 0.7; filter: drop-shadow(0 0 4px #008cff); }
+}
+
+/* 4. ACTUALIZAR OLA PARA QUE COINCIDA CON EL FONDO NEGRO/AZUL */
+.ocean-divider .shape-fill {
+    fill: #00050a !important; 
+}
+/* =========================================
+   FOOTER: PROFUNDIDAD ABISAL
+   ========================================= */
+
+.cyber-footer {
+    /* 1. FONDO CONTINUO */
+    /* Usamos el mismo negro profundo para que se fusione con la sección de arriba */
+    background: #000000 !important;
+    
+    /* 2. BORDE SUPERIOR SUTIL */
+    /* Cambiamos el verde sólido por una línea de luz muy fina, casi invisible */
+    border-top: 1px solid rgba(0, 255, 234, 0.1) !important;
+    
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+    padding-bottom: 40px;
+}
+
+/* 3. ELIMINAR LA CUADRÍCULA VIEJA */
+.cyber-grid-bg {
+    display: none !important;
+}
+
+/* 4. APLICAR BIOLUMINISCENCIA (COPIAMOS EL EFECTO DE CONTACTO) */
+.cyber-footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    
+    /* El mismo patrón de luces de las Maldivas */
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(0, 255, 234, 0.1), transparent 20%),
+        radial-gradient(circle at 85% 30%, rgba(0, 140, 255, 0.1), transparent 20%),
+        
+        radial-gradient(2px 2px at 20% 20%, #00ffff, transparent),
+        radial-gradient(2px 2px at 50% 80%, #008cff, transparent),
+        radial-gradient(2px 2px at 80% 40%, #00ffea, transparent),
+        radial-gradient(1px 1px at 10% 90%, #ffffff, transparent);
+        
+    background-size: 200px 200px;
+    filter: drop-shadow(0 0 5px #00ffea);
+    animation: bioPulse 6s ease-in-out infinite alternate; /* Un poco más lento que arriba */
+    opacity: 0.5; 
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 5. AJUSTE DEL PANEL INTERNO PARA QUE FLOTE */
+.cyber-panel {
+    /* Lo hacemos más oscuro y transparente para que destaque sobre las luces */
+    background: rgba(0, 5, 10, 0.7) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 234, 0.2) !important;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.9) !important;
+    
+    position: relative;
+    z-index: 2; /* Encima de las luces */
+}
+
+/* =========================================
+   CONEXIÓN DE SECCIONES (CABLE & FADE)
+   ========================================= */
+
+/* 1. EL DEGRADADO (SUAVIZAR EL CORTE) */
+.depth-fade {
+    position: absolute;
+    bottom: -2px; /* Lo bajamos un pelín para tapar cualquier rendija */
+    left: 0;
+    width: 100%;
+    
+    /* 1. MÁS ALTURA: */
+    /* Aumentamos de 300px a 600px para que el cambio sea muy lento y suave */
+    height: 600px !important; 
+    
+    /* 2. DEGRADADO PERFECTO: */
+    /* Empieza invisible arriba y termina en el color EXACTO de la sección de contacto (#00050a) */
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,           /* Invisible arriba */
+        rgba(0, 5, 10, 0.4) 40%,  /* Oscurecimiento gradual a mitad de camino */
+        rgba(0, 5, 10, 0.8) 70%,  /* Casi sólido antes de llegar abajo */
+        #00050a 100%              /* Sólido total (Mismo color que #contacto) */
+    ) !important;
+
+    z-index: 2; /* Encima del fondo, detrás del contenido */
+    pointer-events: none;
+}
+
+/* 2. EL CABLE DE DATOS (CONECTOR VERTICAL) */
+.data-cable-container {
+    position: absolute;
+    bottom: -80px; /* Hacemos que cuelgue hacia la sección de abajo */
+    right: 15%; /* Ubicado a la derecha, cerca de la aleta del pez */
+    width: 2px;
+    height: 400px; /* Largo del cable */
+    z-index: 25; /* ¡Encima de la ola! Esto conecta las dos secciones visualmente */
+}
+
+/* La línea del cable */
+.data-line {
+    width: 100%;
+    height: 100%;
+    /* Un cable cian semitransparente */
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 255, 234, 0.5) 20%,
+        rgba(0, 255, 234, 0.8) 100%
+    );
+    box-shadow: 0 0 10px rgba(0, 255, 234, 0.4);
+}
+
+/* El nodo brillante al final (La punta del cable) */
+.data-node {
+    position: absolute;
+    bottom: 0;
+    left: -4px; /* Centrado con la línea */
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #00ffea, 0 0 30px #00ffea;
+    animation: pulseNode 2s infinite;
+}
+
+@keyframes pulseNode {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Ajuste para móvil: Movemos el cable para que no tape texto */
+@media (max-width: 768px) {
+    .data-cable-container {
+        right: 10%; /* Más a la orilla */
+        height: 250px; /* Más corto */
+        bottom: -50px;
+    }
+}
+/* =========================================
+   AJUSTES FINALES DE TRANSICIÓN
+   ========================================= */
+
+/* 1. PONER LA TARJETA ARRIBA DEL FADE */
+/* Esto asegura que la tarjeta se vea brillante y clickeable, no tapada por la sombra */
+.frutiger-section .container {
+    position: relative;
+    z-index: 20 !important; /* Mayor que el z-index: 2 del fade */
+}
+
+/* 2. ELIMINAR EL CABLE (LAZO) */
+.data-cable-container {
+    display: none !important;
+}
+
+/* 3. AGREGAR LUCES AL FADE (INICIO DE BIOLUMINISCENCIA) */
+/* Usamos un pseudo-elemento para pintar las luces DENTRO de la sombra */
+.depth-fade::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    
+    /* Copiamos el patrón de luces de la sección de contacto */
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #00ffea, transparent),
+        radial-gradient(2px 2px at 50px 160px, #008cff, transparent),
+        radial-gradient(2px 2px at 90px 40px, #ffffff, transparent),
+        radial-gradient(1px 1px at 130px 80px, #00ffea, transparent);
+    
+    background-size: 200px 200px;
+    
+    /* ANIMACIÓN: Mismo parpadeo */
+    animation: bioPulse 5s infinite alternate;
+    
+    /* MÁGICA: Hacemos que las luces aparezcan gradualmente hacia abajo */
+    /* Arriba (transparente) -> Abajo (Visible) */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
+    
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* =========================================
+   CONEXIÓN VR -> OCÉANO (LOOP PERFECTO)
+   ========================================= */
+
+/* CREAMOS LAS OLAS CON CSS (Pseudo-elementos) */
+.surface-transition::before,
+.surface-transition::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    background-repeat: repeat-x; /* Se repite horizontalmente sin fin */
+}
+
+/* 1. OLA DE ESPUMA (ATRÁS) */
+/* 1. OLA DE ESPUMA (ATRÁS - MUY LENTA) */
+/* =========================================
+   CONEXIÓN VR -> OCÉANO (OLAS PEQUEÑAS)
+   ========================================= */
+
+.surface-transition {
+    position: relative;
+    width: 100%;
+    
+    /* 1. CAMBIO DE TAMAÑO: */
+    /* De 150px bajamos a 60px (Mucho más sutil) */
+    height: 60px !important; 
+    
+    /* 2. AJUSTE DE POSICIÓN: */
+    /* Subimos solo lo necesario para tapar el borde */
+    margin-top: -59px !important; 
+    
+    z-index: 15;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* MANTENEMOS LA ANIMACIÓN LENTA Y EL COLOR */
+.surface-transition::before {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V150H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='rgba(255, 255, 255, 0.2)'/%3E%3C/svg%3E");
+    background-size: 2000px 100%;
+    animation: wave-slide 60s linear infinite !important; /* Lento */
+    content: ""; position: absolute; width: 100%; height: 100%; bottom: 0; left: 0; background-repeat: repeat-x;
+}
+
+.surface-transition::after {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V150H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%2300609c'/%3E%3C/svg%3E");
+    background-size: 1600px 100%;
+    animation: wave-slide 40s linear infinite reverse !important; /* Lento */
+    height: 85%; /* Ajuste para que se vea la espuma */
+    content: ""; position: absolute; width: 100%; bottom: -1px; left: 0; background-repeat: repeat-x;
+}
+
+
+/* ASEGURAR FUSIÓN CON SECCIÓN DE ABAJO */
+.frutiger-section {
+    background: linear-gradient(
+        180deg, 
+        #00609c 0%,   /* <--- COLOR IDÉNTICO A LA OLA */
+        #00609c 5%,   
+        #003366 100%
+    ) !important;
+    margin-top: -2px !important;
+    padding-top: 50px !important;
+}
+/* =========================================
+   EFECTO BURBUJAS VR (V2 - CRISTAL GRANDES)
+   ========================================= */
+
+.vr-cursor-bubble {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    
+    /* 1. EFECTO CRISTAL / GEL */
+    /* Fondo casi transparente, solo un tinte muy sutil */
+    background: radial-gradient(
+        circle at 30% 30%, 
+        rgba(255, 255, 255, 0.9) 0%,   /* Brillo fuerte (reflejo de luz) */
+        rgba(255, 255, 255, 0.1) 20%,  /* Cuerpo semitransparente */
+        rgba(255, 255, 255, 0.05) 100% /* Casi invisible al final */
+    );
+    
+    /* Borde fino y brillante */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    
+    /* Sombra interna para dar volumen 3D */
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.2); 
+    
+    /* 2. DURACIÓN: 4 segundos (Lento) */
+    animation: vrBubbleFloat 4s ease-out forwards;
+}
+
+@keyframes vrBubbleFloat {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    10% {
+        opacity: 1; /* Aparece rápido */
+    }
+    100% {
+        opacity: 0; /* Desaparece suave al final */
+        /* Sube mucho más alto (-300px) porque tiene más tiempo */
+        transform: translate(calc(-50% + var(--x-move)), -300px) scale(1.2);
+    }
+}
+/* =========================================
+   OPTIMIZACIÓN TABLET (768px - 1024px)
+   ========================================= */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    /* --- 1. HERO / BANNER --- */
+    /* Evitar que el título choque con la TV en tablets verticales */
+    .banner-box .row {
+        flex-direction: column; /* Apilar uno sobre otro */
+        text-align: center;
+    }
+    .title-container {
+        margin-bottom: 2rem; /* Espacio entre título y TV */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    /* Ajuste de tamaños para que no se vea gigante */
+    .title-pill {
+        font-size: 2rem !important;
+        margin-right: 0 !important; /* Centrado */
+        margin-bottom: 10px;
+    }
+    .core-text {
+        position: static !important; /* Ya no flotante */
+        font-size: 1.5rem !important;
+    }
+    /* La TV centrada y con tamaño controlado */
+    .photo-circle-border {
+        width: 300px !important;
+        height: 300px !important;
+        margin: 0 auto;
+    }
+
+    /* --- 2. TIENDA (SELECTOR DE ESTILOS) --- */
+    /* Ajuste para que las burbujas de estilo quepan bien */
+    .style-circle-btn {
+        width: 180px !important;
+        height: 180px !important;
+    }
+    /* Texto de tienda más legible */
+    #style-title {
+        font-size: 2rem !important;
+        text-align: center;
+    }
+    #products-ui .row {
+        flex-direction: column; /* Filtros arriba, carrusel abajo */
+        align-items: center;
+    }
+    #products-ui .col-lg-3 {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    /* --- 3. SECCIÓN VR --- */
+    .vr-main-title {
+        font-size: 1.8rem !important;
+        padding: 10px 20px !important;
+    }
+    /* Controles centrados abajo */
+    .vr-controls-area {
+        justify-content: center !important;
+        padding-right: 0 !important;
+    }
+
+    /* --- 4. FRUTIGER (SOBRE NOSOTROS) --- */
+    /* AQUÍ EL CAMBIO IMPORTANTE: Apilar en vez de lado a lado */
+    .frutiger-glass-card {
+        flex-direction: column !important;
+        text-align: center;
+        padding: 2rem !important;
+    }
+    .frutiger-glass-card .col-md-5, 
+    .frutiger-glass-card .col-md-7 {
+        width: 100% !important; /* Ancho completo */
+        margin-bottom: 20px;
+    }
+    .logo-glow-container img {
+        width: 180px !important; /* Logo más pequeño */
+    }
+
+    /* --- 5. CONTACTO (EL PROBLEMA PRINCIPAL) --- */
+    /* En tablet, el formulario se aplasta si se pone al lado de la pecera.
+       Lo solucionamos forzando que se apilen: Formulario Arriba, Pecera Abajo. */
+    
+    .ocean-wrapper .row {
+        display: flex;
+        flex-direction: column; 
+    }
+    
+    /* El Formulario ocupa todo el ancho */
+    .ocean-wrapper .col-md-5 {
+        width: 100% !important;
+        order: 1; /* Primero el form */
+        padding: 2rem !important; /* Reducimos padding interno (antes era p-5) */
+    }
+    
+    /* La pecera ocupa todo el ancho y tiene altura fija */
+    .ocean-wrapper .col-md-7 {
+        width: 100% !important;
+        height: 300px !important; /* Altura para ver los peces */
+        order: 2; /* Pecera abajo */
+        position: relative;
+    }
+    
+    /* Ajuste del fondo de corales para que llene la pecera horizontal */
+    .coral-center { left: 50% !important; transform: translateX(-50%) !important; }
+    .coral-left { left: 0 !important; }
+    .coral-right { right: 0 !important; }
+}
+/* Padding normal en PC */
+.contact-form-container {
+    padding: 3rem; /* Equivalente a p-5 aprox */
+}
+
+/* Padding reducido en Tablet/Móvil para ganar espacio */
+@media (max-width: 1024px) {
+    .contact-form-container {
+        padding: 1.5rem; 
+    }
+}
