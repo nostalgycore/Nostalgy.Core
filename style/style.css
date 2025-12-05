@@ -80,11 +80,34 @@ a, button, .style-bubble, .cyber-img-box, .btn-cyber-add {
 .window-controls { display: flex; gap: 4px; pointer-events: none; }
 
 .win-btn {
-    width: 18px; height: 18px;
+    width: 18px; 
+    height: 18px;
     background-color: #c0c0c0;
-    border: 1px solid #fff; border-right-color: #808080; border-bottom-color: #808080;
-    display: flex; justify-content: center; align-items: center;
-    font-family: sans-serif; font-size: 9px; font-weight: bold; color: black;
+    border: 1px solid #fff; 
+    border-right-color: #808080; 
+    border-bottom-color: #808080;
+    
+    /* CENTRADO PERFECTO */
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    
+    font-family: sans-serif; 
+    font-size: 9px; 
+    font-weight: bold; 
+    color: black;
+    
+    /* --- FIX CLIC: ESTO ES LO IMPORTANTE --- */
+    position: relative;        /* Necesario para z-index */
+    z-index: 1000 !important;  /* Ponlo encima de todo */
+    pointer-events: auto !important; /* Habilita el clic */
+    cursor: pointer !important;
+    user-select: none !important; /* Evita seleccionar el texto */
+}
+
+/* Agrega esto justo debajo para asegurar que la X no bloquee el clic */
+.win-btn * {
+    pointer-events: none !important; 
 }
 .win-btn.close-x { background-color: #ff3b3b; color: white; }
 
@@ -2975,4 +2998,5 @@ textarea {
 /* Cuando agarras y arrastras */
 .swiper-wrapper:active {
     cursor: url('../recursos/mano-pixel.png'), grabbing !important;
+
 }
