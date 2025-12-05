@@ -1,11 +1,12 @@
-const CACHE_NAME = 'nostalgy-core-v2'; // Cambié a v2 para forzar actualización
+const CACHE_NAME = 'nostalgy-core-v3'; // Cambié a v2 para forzar actualización
 
 // Archivos vitales para que la app se vea bien sin internet
 const urlsToCache = [
   './',
   './index.html',
   './inicio.html',
-  './admin.html', // Opcional si el admin lo usa offline
+  './admin.html',
+  './nosotros.html',
   './manifest.webmanifest',
   './style/style.css',
   './scripts/pwa.js',
