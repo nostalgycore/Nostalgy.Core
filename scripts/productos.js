@@ -496,79 +496,125 @@ function mostrarNotificacion(mensaje, tipo = 'success') {
     }
 }
 
-// Asegúrate de que esta función esté disponible globalmente o dentro del módulo
+// ==========================================
+// 7. LÓGICA DE PAGO Y DESCARGA (NUEVO)
+// ==========================================
 
-function procesarPagoYGenerarLinks() {
+// FUNCIÓN A: Abre el Modal de Datos (Paso intermedio)
+window.procesarPagoYGenerarLinks = function() {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     
-    // Validación de seguridad
-    if(carrito.length === 0) return mostrarNotificacion("ERROR: Carrito vacío");
+    // Si está vacío, error
+    if(carrito.length === 0) return mostrarNotificacion("ERROR: Carrito vacío", "error");
+
+    // 1. Calcular el total para mostrarlo en el modal azul
+    const total = carrito.reduce((acc, item) => acc + parseFloat(item.precio), 0);
+    const display = document.getElementById('checkout-total-display');
+    if(display) display.innerText = `$${total.toFixed(2)}`;
+
+    // 2. Cerrar la barra lateral del carrito (Offcanvas)
+    const cartOffcanvas = document.getElementById('cartOffcanvas');
+    if(cartOffcanvas) {
+        const bsOffcanvas = bootstrap.Offcanvas.getInstance(cartOffcanvas);
+        if(bsOffcanvas) bsOffcanvas.hide();
+    }
+
+    // 3. Abrir el Modal de la Pasarela de Pago
+    const modalPago = new bootstrap.Modal(document.getElementById('modalPasarelaPago'));
+    modalPago.show();
+};
+
+// FUNCIÓN B: Procesa el Pago, Simula Banco y Muestra Links (Paso Final)
+window.confirmarPagoFinal = function() {
+    // 1. Validar que el usuario escribió algo
+    const emailInput = document.getElementById('input-email-checkout');
+    const form = document.getElementById('payment-form');
     
-    const containerLinks = document.getElementById('lista-links-compra');
-    if (!containerLinks) return;
+    if(!form.checkValidity()) {
+        form.reportValidity(); // Muestra los mensajes de error del navegador
+        return;
+    }
 
-    // 1. Limpiar contenedor previo
-    containerLinks.innerHTML = '';
+    // 2. Efecto visual de "Cargando..." en el botón
+    const btnPay = document.querySelector('#modalPasarelaPago .btn-cyber-chrome');
+    const btnText = document.getElementById('btn-pay-text');
+    const originalText = btnText.innerText;
+    
+    btnText.innerText = "PROCESANDO...";
+    btnPay.style.opacity = "0.7";
+    btnPay.style.pointerEvents = "none"; // Evitar doble clic
 
-    // 2. Generar la lista de enlaces
-    carrito.forEach(prod => {
-        // Validamos si existe el link, si no, ponemos un placeholder
-        const link = prod.linkDescarga || '#'; 
-        const linkValido = link !== '#' ? 'target="_blank"' : 'onclick="alert(\'Link no disponible\')"';
-        
-        // --- VERSIÓN MEJORADA CON MINIATURA (CYBER STYLE) ---
-        const htmlItem = `
-            <div class="download-item">
-                
-                <div class="d-flex align-items-center">
-                    
-                    <img src="${prod.imagenUrl || 'recursos/logoNC.webp'}" 
-                         alt="thumb"
-                         style="width:45px; height:45px; object-fit:cover; border:1px solid #4a76fd; margin-right:12px; border-radius: 4px;">
+    // 3. SIMULACIÓN DE ESPERA (2 Segundos)
+    setTimeout(() => {
+        // --- AQUI OCURRE EL "ÉXITO" ---
 
-                    <div class="text-white small" style="font-family: 'Sora'; line-height: 1.2;">
-                        <div style="color: #fff; font-weight: 600; font-size: 0.85rem;">${prod.nombre}</div>
-                        <div style="color: #a6c1ff; font-size: 0.65rem; margin-top: 2px;">
-                            &lt;${prod.formato || 'DATA'}&gt;
+        // A. Ocultar modal de pago
+        const modalPagoEl = document.getElementById('modalPasarelaPago');
+        const modalPago = bootstrap.Modal.getInstance(modalPagoEl);
+        modalPago.hide();
+
+        // B. Preparar la lista de links para el modal de éxito
+        const containerLinks = document.getElementById('lista-links-compra');
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        containerLinks.innerHTML = '';
+
+        carrito.forEach(prod => {
+            const link = prod.linkDescarga || '#'; 
+            // Si el link es #, mostramos alerta, si no, abre nueva pestaña
+            const linkValido = link !== '#' ? 'target="_blank"' : 'onclick="alert(\'Link no disponible\')"';
+            
+            const htmlItem = `
+                <div class="download-item">
+                    <div class="d-flex align-items-center">
+                        <img src="${prod.imagenUrl || 'recursos/logoNC.webp'}" 
+                             style="width:45px; height:45px; object-fit:cover; border:1px solid #4a76fd; margin-right:12px; border-radius: 4px;">
+                        <div class="text-white small" style="font-family: 'Sora'; line-height: 1.2;">
+                            <div style="color: #fff; font-weight: 600; font-size: 0.85rem;">${prod.nombre}</div>
+                            <div style="color: #a6c1ff; font-size: 0.65rem; margin-top: 2px;">&lt;${prod.formato || 'DIGITAL'}&gt;</div>
                         </div>
                     </div>
+                    <a href="${link}" ${linkValido} class="btn-download-link ms-3">
+                        BAJAR <i class="bi bi-download"></i>
+                    </a>
                 </div>
+            `;
+            containerLinks.innerHTML += htmlItem;
+        });
 
-                <a href="${link}" ${linkValido} class="btn-download-link ms-3">
-                    BAJAR <i class="bi bi-download"></i>
-                </a>
-            </div>
-        `;
-        containerLinks.innerHTML += htmlItem;
-    });
+        // C. Mostrar notificación de correo
+        mostrarNotificacion(`LINKS ENVIADOS A: ${emailInput.value}`);
+        
+        // D. Mostrar el Modal Final (Éxito)
+        const modalExito = new bootstrap.Modal(document.getElementById('modalCompraExitosa'));
+        modalExito.show();
 
-    // 3. Mostrar el Modal
-    // Usamos la API de Bootstrap 5
-    const modalEl = document.getElementById('modalCompraExitosa');
-    const modal = new bootstrap.Modal(modalEl);
-    modal.show();
+        // E. Limpieza final (Borrar carrito y resetear formulario)
+        localStorage.removeItem("carrito");
+        actualizarVistaCarrito();
+        
+        // Restaurar botón para la próxima
+        btnText.innerText = originalText;
+        btnPay.style.opacity = "1";
+        btnPay.style.pointerEvents = "all";
+        form.reset();
 
-    // 4. Limpiar carrito y cerrar Offcanvas
-    localStorage.removeItem("carrito");
-    actualizarVistaCarrito();
-    
-    // Opcional: Cerrar el sidebar del carrito si está abierto
-    const cartOffcanvas = document.getElementById('cartOffcanvas');
-    const bsOffcanvas = bootstrap.Offcanvas.getInstance(cartOffcanvas);
-    if(bsOffcanvas) bsOffcanvas.hide();
-
-    mostrarNotificacion("COMPRA PROCESADA CON ÉXITO");
-}
-
+    }, 2500); // Tiempo de espera: 2.5 segundos
+};
 // IMPORTANTE: Asegúrate de volver a asignar el evento click al botón de pagar
 // Esto va dentro del DOMContentLoaded o donde asignas tus eventos
-const btnPagar = document.getElementById('pagar');
-if(btnPagar) {
-    // Removemos listeners anteriores para evitar duplicados si recargas módulos
-    const newBtn = btnPagar.cloneNode(true);
-    btnPagar.parentNode.replaceChild(newBtn, btnPagar);
-    newBtn.addEventListener('click', procesarPagoYGenerarLinks);
-}
+// EVENTOS: Asegurar que el botón del carrito llame a la nueva función
+document.addEventListener('DOMContentLoaded', () => {
+    // Botón "PROCESAR PAGO" del carrito lateral
+    const btnPagar = document.getElementById('pagar');
+    if(btnPagar) {
+        // Clonamos para limpiar eventos viejos y evitar errores
+        const newBtn = btnPagar.cloneNode(true);
+        btnPagar.parentNode.replaceChild(newBtn, btnPagar);
+        
+        // Asignamos la función que abre el formulario
+        newBtn.addEventListener('click', window.procesarPagoYGenerarLinks);
+    }
+});
 
 window.verImagenGrande = function(url) {
     const el = document.getElementById('img-visor-src');
