@@ -2,7 +2,7 @@
    1. CONFIGURACIÓN GENERAL
    ========================================= */
 body {
-    cursor: url('../recursos/cursor-pixel.webp'), auto;
+    cursor: url('../recursos/cursor-pixel.png'), auto;
     margin: 0;
     padding: 0;
     background-color: #000;
@@ -149,11 +149,12 @@ a, button, .style-bubble, .cyber-img-box, .btn-cyber-add {
 .photo-container { animation: zoomIn 0.8s ease-out; }
 
 .photo-circle-border {
-    width: min(50vh, 400px); height: min(50vh, 400px);
+    width: min(45vh, 350px); height: min(45vh, 350px);
     background: transparent; border-radius: 50%;
     border: 4px dashed #00ffaa;
     box-shadow: 0 0 20px #00ffaa, inset 0 0 20px #00ffaa;
     display: flex; justify-content: center; align-items: center;
+    aspect-ratio: 1 / 1; flex-shrink: 0;
     animation: pulseGlow 2s infinite alternate;
 }
 
@@ -1856,7 +1857,7 @@ a, button, .style-bubble, .cyber-img-box, .btn-cyber-add {
     
     /* 2. TRUCO CLAVE: Stroke al texto para engrosar visualmente */
     /* 1px de borde del mismo color hace que se vea "bold" */
-    -webkit-text-stroke: 1px #00ffaa; 
+    -webkit-text-stroke: 2px #00ffaa; 
     
     /* Color base */
     color: #00ffaa !important;
@@ -2723,4 +2724,255 @@ textarea {
     .contact-form-container {
         padding: 1.5rem; 
     }
+}
+/* Ajuste iconos formulario pago */
+.input-group-text i {
+    color: #4a76fd;
+    text-shadow: 0 0 5px #4a76fd;
+}
+/* Inputs transparentes dentro del recuadro de tarjeta */
+#payment-form input::placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+#payment-form input:focus {
+    box-shadow: none !important; /* Quitar brillo bootstrap estándar */
+    border-bottom: 1px solid #00ffaa !important;
+}
+/* --- FIX: RANGO INTERMEDIO (LAPTOPS / TABLETS HORIZONTAL) --- */
+/* Afecta pantallas entre 768px y 1366px (donde ocurría el error) */
+@media (min-width: 768px) and (max-width: 1366px) {
+    
+    /* Reducimos las burbujas para que quepan las 4 en una fila */
+    .style-circle-btn {
+        width: 170px !important;
+        height: 170px !important;
+    }
+
+    /* Reducimos el margen entre ellas */
+    .style-item {
+        margin: 5px !important;
+    }
+
+    /* Ajustamos el texto dentro de la burbuja */
+    .style-label {
+        font-size: 0.8rem !important;
+    }
+    
+    /* FIX ADICIONAL BANNER:
+       Si en este tamaño la TV sigue molestando, forzamos que se apilen 
+       antes de llegar a modo móvil */
+    .banner-box .row {
+        justify-content: center;
+    }
+}
+/* --- FIX BANNER: TABLETS (768px a 1024px) --- */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    /* 1. OBLIGAR ALINEACIÓN LADO A LADO */
+    .banner-box .row {
+        flex-direction: row !important; /* Fila horizontal */
+        align-items: center !important; /* Centrado vertical */
+        justify-content: center !important;
+        flex-wrap: nowrap !important; /* No bajar de línea */
+    }
+
+    /* 2. TEXTOS Y TÍTULO (IZQUIERDA) */
+    .banner-box .col-12.col-lg-7 {
+        width: 55% !important; /* Ocupa un poco más de la mitad */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start !important; /* Alinear a la izquierda */
+        text-align: left !important;
+        padding-right: 10px;
+    }
+
+    /* Ajustar tamaño del título para que quepa */
+    .title-pill {
+        font-size: 1.6rem !important; /* Más pequeño que en PC */
+        padding: 10px 25px !important;
+        margin-right: 10px !important;
+        margin-bottom: 0 !important;
+    }
+    
+    .core-text {
+        font-size: 1.4rem !important;
+        bottom: -20px !important; /* Ajuste posición */
+        right: 10% !important;
+    }
+
+    /* 3. LA TV (DERECHA) */
+    .banner-box .col-12.col-lg-5 {
+        width: 45% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* CANDADO DE PROPORCIÓN (Para que no se estire nunca) */
+    .photo-circle-border {
+        width: 260px !important; /* Tamaño ideal tablet */
+        height: 260px !important;
+        aspect-ratio: 1 / 1 !important; /* Círculo perfecto siempre */
+        flex-shrink: 0 !important; /* Prohibido aplastarse */
+        margin: 0 !important;
+    }
+}
+/* =========================================
+   MEDIA QUERIES (VERSIÓN FINAL ARREGLADA)
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 1. TEXTOS Y TAMAÑOS GENERALES */
+    .title-pill { font-size: 1.5rem; padding: 10px 20px; margin-right: 15px; }
+    .core-text { font-size: 1.2rem; bottom: -15px; }
+    .globe-icon { width: 60px; height: 60px; }
+    
+    /* 2. BANNER / TV */
+    .photo-circle-border { width: 250px; height: 250px; }
+    
+    /* 3. CONTACTO (PECERA) - VERTICAL */
+    .ocean-wrapper .col-md-7 { 
+        min-height: 300px !important; 
+        height: 300px !important; 
+        display: block !important; 
+        margin-top: 20px; 
+    }
+    #fishTank { width: 100% !important; height: 100% !important; min-height: 100% !important; display: block !important; }
+    .ocean-wrapper { height: auto !important; padding-bottom: 20px; }
+    
+    /* 4. MÁRGENES GENERALES */
+    .main-content { padding-bottom: 70px !important; }
+    .main-content .container { padding-top: 1rem !important; padding-bottom: 2rem !important; }
+    .shop-section { padding-top: 20px; padding-bottom: 10px; }
+    .section-title { font-size: 1.3rem; margin-bottom: 2rem !important; }
+    
+    /* 5. TIENDA (BURBUJAS) */
+    .style-circle-btn { width: 120px; height: 120px; } /* Un poco más chicas */
+    .style-label { font-size: 0.7rem; }
+    .style-item { margin: 10px; }
+    #products-ui { padding-bottom: 80px !important; }
+    #products-ui .d-flex.gap-2 { flex-wrap: wrap !important; justify-content: center !important; gap: 10px !important; margin-bottom: 20px !important; }
+    .filter-pill { font-size: 0.75rem !important; padding: 8px 16px !important; }
+    #style-title { text-align: center; font-size: 1.5rem !important; margin-top: 10px; }
+    .style-circle-btn .style-label { opacity: 1 !important; transform: translate(-50%, -50%) !important; font-size: 0.8rem !important; width: 100%; padding: 0 5px; }
+    .style-circle-btn img { filter: brightness(0.4) !important; }
+
+    /* 6. FRUTIGER */
+    .frutiger-title { font-size: 2.2rem; }
+    .frutiger-logo { width: 150px; }
+    .data-cable-container { right: 10%; height: 250px; bottom: -50px; }
+    
+    /* 7. BOTONES FLOTANTES */
+    #fab-cart-top {
+        position: fixed !important; top: 20px !important; right: 20px !important;
+        width: 45px !important; height: 45px !important; font-size: 1.2rem !important;
+        background: rgba(0, 0, 0, 0.9) !important; border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 50% !important; display: flex !important; justify-content: center; align-items: center;
+        z-index: 2000 !important; box-shadow: 0 0 15px rgba(0, 255, 170, 0.3) !important;
+    }
+    #tv-controls-container {
+        margin-top: -130px !important; margin-bottom: 30px !important;
+        position: relative !important; display: flex !important; justify-content: center !important; z-index: 50 !important;
+    }
+    #visor-inmersivo { height: auto !important; min-height: 120vh !important; overflow-y: visible !important; padding-bottom: 50px !important; }
+    #products-ui { padding-bottom: 100px !important; position: relative !important; inset: auto !important; height: auto !important; margin-top: 0px !important; padding-top: 10px !important; }
+
+    /* --- [FIX] FLECHAS CARRUSEL DE PRODUCTOS (AZULES) --- */
+    /* Las hacemos más pequeñas y las pegamos al borde, pero DENTRO */
+    .swiper-button-next, .swiper-button-prev {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .swiper-button-next::after, .swiper-button-prev::after {
+        font-size: 1.5rem !important;
+    }
+    .swiper-button-next { right: 0px !important; }
+    .swiper-button-prev { left: 0px !important; }
+
+    /* --- [FIX] FLECHAS SECCIÓN VR (ROJAS) --- */
+    /* Aquí está el truco: Las hacemos flotantes (absolute) sobre la tarjeta */
+    .vr-controls-area .d-flex {
+        position: relative;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .vr-nav-btn {
+        position: absolute; /* Sacarlas del flujo para que no empujen */
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 50;
+        
+        /* Les ponemos un fondito oscuro para que se vean encima de la tarjeta */
+        background: rgba(0, 0, 0, 0.6) !important;
+        border-radius: 50%;
+        width: 40px; 
+        height: 40px;
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        padding: 0 !important;
+        font-size: 1.5rem !important; /* Flecha más pequeña */
+    }
+
+    /* Ubicación exacta: Izquierda y Derecha */
+    .prev-btn { left: 5px; }
+    .next-btn { right: 5px; }
+
+    /* Hacemos la tarjeta VR un poquito más angosta para que quepan las flechas */
+    .vrSwiper {
+        width: 85% !important; 
+    }
+}
+/* =========================================
+   FIX FINAL: CURSORES PERSONALIZADOS
+   ========================================= */
+
+/* 1. CURSOR NORMAL (Flecha) */
+/* El * obliga a que TODOS los elementos usen este cursor por defecto */
+*, html, body {
+    cursor: url('../recursos/cursor-pixel.png'), auto !important;
+}
+
+/* 2. CURSOR DE ACCIÓN (Manita) */
+/* Lista completa de todo lo que se puede cliquear */
+a, 
+button, 
+.btn, 
+.nav-link-retro, 
+.style-circle-btn, 
+.cyber-card, 
+.btn-cyber-add, 
+.cart-trigger, 
+.btn-cyber-chrome, 
+.close-x, 
+.win-btn, 
+.vr-nav-btn,
+.swiper-button-next, 
+.swiper-button-prev,
+.form-check-input,
+.dropdown-item,
+select {
+    cursor: url('../recursos/mano-pixel.png'), pointer !important;
+}
+
+/* 3. CURSOR DE TEXTO (Opcional) */
+/* Para que al escribir no salga la flecha pixelada, sino la barrita de texto normal */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="number"], 
+textarea {
+    cursor: text !important;
+}
+
+/* 4. FIX EXTRA PARA SWIPER (Carruseles) */
+/* A veces Swiper pone un cursor de 'grab' (mano abierta) */
+.swiper-wrapper, .swiper-slide {
+    cursor: url('../recursos/cursor-pixel.png'), auto !important;
+}
+
+/* Cuando agarras y arrastras */
+.swiper-wrapper:active {
+    cursor: url('../recursos/mano-pixel.png'), grabbing !important;
 }
