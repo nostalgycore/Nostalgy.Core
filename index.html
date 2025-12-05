@@ -260,6 +260,42 @@
                 filter: brightness(0);
             }
         }
+
+        /* --- ESTILOS BOTÓN PWA --- */
+        .fab-wrapper {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .bubble-fab {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+            border: 2px solid #00ffaa;      /* Borde verde neón */
+            color: #00ffaa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 255, 170, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .bubble-fab:hover {
+            background: #00ffaa;
+            color: #000;
+            box-shadow: 0 0 30px #00ffaa;
+            transform: scale(1.1) rotate(-10deg);
+        }
+
+        /* Clase auxiliar para ocultar (la usa el script pwa.js) */
+        .d-none {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -295,6 +331,11 @@
                 <p id="login-error" class="text-danger mt-2 d-none" style="font-size: 0.6rem;">> ACCESS_DENIED</p>
             </div>
         </div>
+    </div>
+    <div class="fab-wrapper">
+        <button id="pwa-install-btn" class="bubble-fab d-none" title="Instalar App">
+            <i class="bi bi-download"></i>
+        </button>
     </div>
     <script src="scripts/pwa.js"></script>
     <script>
@@ -375,3 +416,4 @@
     </script>
 </body>
 </html>
+
