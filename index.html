@@ -261,20 +261,36 @@
             }
         }
 
-        /* --- ESTILOS BOTÓN PWA --- */
+        /* --- ESTILOS BOTÓN PWA (CON RETRASO DE TV) --- */
         .fab-wrapper {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 9999;
+
+            /* 1. ESTADO INICIAL: INVISIBLE */
+            opacity: 0;
+            
+            /* 2. ANIMACIÓN: Aparecer suavemente */
+            animation: fadeInButton 1s ease-out forwards;
+            
+            /* 3. EL RETRASO CLAVE: 4 Segundos */
+            /* (3s de la TV + 1s de pausa para que se vea elegante) */
+            animation-delay: 4s; 
+        }
+
+        /* Definimos la animación de aparición */
+        @keyframes fadeInButton {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .bubble-fab {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
-            border: 2px solid #00ffaa;      /* Borde verde neón */
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ffaa;
             color: #00ffaa;
             display: flex;
             justify-content: center;
@@ -292,7 +308,6 @@
             transform: scale(1.1) rotate(-10deg);
         }
 
-        /* Clase auxiliar para ocultar (la usa el script pwa.js) */
         .d-none {
             display: none !important;
         }
@@ -416,4 +431,5 @@
     </script>
 </body>
 </html>
+
 
