@@ -256,8 +256,7 @@ function renderVRExperiences(productos) {
             <div class="swiper-slide">
                 <div class="y2k-card-compact">
                     <div class="y2k-header-bar">
-                        <span class="y2k-pill">VR_ASSET</span>
-                        <span style="color: #0044cc;">★</span>
+                        <span class="y2k-pill">VR</span>
                     </div>
                     
                     <h3 class="y2k-title">${p.nombre}</h3>
@@ -319,7 +318,7 @@ window.agregarAlCarrito = function(id) {
     const existe = carrito.find(item => item.id === id);
     
     if (existe) {
-        mostrarNotificacion("ITEM_DUPLICADO: El producto ya está en tu lista.", "error");
+        mostrarNotificacion("El producto ya está en tu lista.", "error");
         return; // <--- AQUÍ SE DETIENE EL PROCESO
     }
 
@@ -393,7 +392,7 @@ function actualizarVistaCarrito() {
                 <div class="d-flex flex-column align-items-center justify-content-center h-100 mt-5 opacity-75">
                     <i class="bi bi-cart-x" style="font-size: 3rem; color: #4a76fd;"></i>
                     <p class="mt-3 pixel-font" style="font-size: 0.7rem; color: #fff;">
-                        > SYSTEM_MSG: VACÍO <span class="blink">_</span>
+                        CARRITO VACÍO <span class="blink">_</span>
                     </p>
                 </div>
             `;
@@ -505,7 +504,7 @@ window.procesarPagoYGenerarLinks = function() {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     
     // Si está vacío, error
-    if(carrito.length === 0) return mostrarNotificacion("ERROR: Carrito vacío", "error");
+    if(carrito.length === 0) return mostrarNotificacion("Carrito vacío", "error");
 
     // 1. Calcular el total para mostrarlo en el modal azul
     const total = carrito.reduce((acc, item) => acc + parseFloat(item.precio), 0);
@@ -574,7 +573,7 @@ window.confirmarPagoFinal = function() {
                         </div>
                     </div>
                     <a href="${link}" ${linkValido} class="btn-download-link ms-3">
-                        BAJAR <i class="bi bi-download"></i>
+                        DESCARGAR <i class="bi bi-download"></i>
                     </a>
                 </div>
             `;
@@ -622,4 +621,5 @@ window.verImagenGrande = function(url) {
         el.src = url;
         new bootstrap.Modal(document.getElementById('imageViewerModal')).show();
     }
+
 };
