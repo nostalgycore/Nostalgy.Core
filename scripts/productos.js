@@ -458,11 +458,11 @@ function mostrarNotificacion(mensaje, tipo = 'success') {
         if (tipo === 'error') {
             color = '#ff3b3b'; // Rojo
             icono = 'bi-exclamation-triangle-fill';
-            titulo = 'SYSTEM_ERROR';
+            titulo = 'ALERTA';
         } else {
             color = '#00ffaa'; // Verde
             icono = 'bi-check-circle-fill';
-            titulo = 'SYSTEM_MSG';
+            titulo = 'MENSAJE';
         }
 
         // 2. APLICAR COLORES (Borde y Sombra)
@@ -623,3 +623,4 @@ window.verImagenGrande = function(url) {
     }
 
 };
+
