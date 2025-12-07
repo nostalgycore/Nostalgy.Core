@@ -27,6 +27,24 @@
             }
         }
     </script>
+    <style>
+        /* 1. Estado inicial: Invisible y Negro */
+        body {
+            opacity: 0; /* Empieza invisible */
+            background-color: #000 !important; /* Fondo negro para que conecte con el apagado de TV */
+            animation: fadeInPage 1.5s ease-out forwards; /* La magia: tarda 1.5s en aparecer */
+        }
+    
+        /* 2. Definición de la animación */
+        @keyframes fadeInPage {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid banner vh-100">
@@ -436,6 +454,7 @@
     <script type="module" src="scripts/productos.js"></script>
 </body>
 </html>
+
 
 
 
