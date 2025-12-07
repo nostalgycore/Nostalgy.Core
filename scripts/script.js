@@ -1,9 +1,3 @@
-// Animación de entrada suave
-document.body.style.opacity = 0;
-window.addEventListener('load', () => {
-    document.body.style.transition = 'opacity 1s';
-    document.body.style.opacity = 1;
-});
 //Fondo de agua
 $(document).ready(function(){
     $('.banner').ripples({
@@ -25,7 +19,7 @@ $('#retroForm').on('submit', function(e) {
     
     setTimeout(function() {
         // Simulamos envío exitoso
-        alert("¡Zumbido enviado con éxito! \n(Mensaje recibido en el servidor Nostalgy)");
+        alert("¡Enviado con éxito! \n(Mensaje recibido)");
         btn.text(originalText).css('transform', 'scale(1)');
         $('#retroForm')[0].reset(); // Limpiar formulario
     }, 1500);
@@ -302,4 +296,5 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => b.remove(), 4000);
     }
 });
+
 
