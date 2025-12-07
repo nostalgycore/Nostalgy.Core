@@ -69,7 +69,7 @@
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav ms-auto gap-3 gap-lg-4 text-start ps-2 align-items-center"> 
                                     <li class="nav-item"><a class="nav-link-retro fw-bold" href="#visor-inmersivo">Tienda</a></li>
-                                    <li class="nav-item"><a class="nav-link-retro fw-bold" href="#sobre-nosotros">Conocenos</a></li>
+                                    <li class="nav-item"><a class="nav-link-retro fw-bold" href="#sobre-nosotros">Conócenos</a></li>
                                     <li class="nav-item"><a class="nav-link-retro fw-bold" href="#contacto">Contacto</a></li>
                                 </ul>
                             </div>
@@ -88,7 +88,7 @@
                             <img src="recursos/manoPixel.webp" class="globe-icon position-absolute" alt="Globo Y2K">
                         </div>
                         <a href="#visor-inmersivo" class="btn-cyber-chrome my-4 mt-lg-5">
-                            <span class="chrome-text">Comprar</span>
+                            <span class="chrome-text">Explorar</span>
                             <div class="chrome-glare"></div>
                         </a>
 
@@ -208,7 +208,7 @@
                             <form id="retroForm">
                                 <div class="mb-4">
                                     <label class="text-white mb-2" style="font-family: 'Press Start 2P'; font-size: 0.6rem; color: #00ffaa !important;">&gt; NOMBRE COMPLETO</label>
-                                    <input type="text" class="form-control" style="background: rgba(255,255,255,0.1); border: none; border-bottom: 1px solid #00ffaa; color: white;" placeholder="Usuario...">
+                                    <input type="text" class="form-control" style="background: rgba(255,255,255,0.1); border: none; border-bottom: 1px solid #00ffaa; color: white;" placeholder="Nombre...">
                                 </div>
                                 <div class="mb-4">
                                     <label class="text-white mb-2" style="font-family: 'Press Start 2P'; font-size: 0.6rem; color: #00ffaa !important;">&gt; EMAIL</label>
@@ -219,7 +219,7 @@
                                     <textarea class="form-control" rows="3" style="background: rgba(255,255,255,0.1); border: none; border-bottom: 1px solid #00ffaa; color: white;" placeholder="Escribe aquí..."></textarea>
                                 </div>
                                 <button type="submit" class="btn w-100" style="border: 1px solid #00ffaa; color: #00ffaa; font-family: 'Press Start 2P'; padding: 15px; background: transparent;">
-                                    [ ENVIAR ]
+                                    ENVIAR
                                 </button>
                             </form>
                         </div>
@@ -251,7 +251,7 @@
                     <span class="cyber-price" style="font-size: 1.2rem;">$<span id="total">0.00</span></span>
                 </div>                
                 <button id="pagar" class="btn-terminal btn-pay">
-                    [ PROCESAR PAGO ]
+                    PROCESAR PAGO
                 </button>                
                 <button id="limpiar-carrito" class="btn-terminal btn-clear">
                     VACIAR CARRITO
@@ -263,7 +263,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content" style="background: black; border: 2px solid #00ffaa;">
                 <div class="modal-header" style="border-bottom: 1px solid #00ffaa;">
-                    <h5 class="modal-title text-white pixel-font" style="font-size: 0.8rem;">IMAGE_VIEWER</h5>
+                    <h5 class="modal-title text-white pixel-font" style="font-size: 0.8rem;">VISTA PREVIA</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body p-0 text-center">
@@ -275,8 +275,7 @@
     <div class="toast-container position-fixed end-0 p-3" style="z-index: 1100; top: 100px !important;">    
         <div id="liveToast" class="toast nostalgy-toast hide" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <strong class="me-auto">> SYSTEM_MSG</strong>
-                <small>Just now</small>
+                <strong class="me-auto">> MENSAJE</strong>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body" id="toast-msg-body"></div>
@@ -287,7 +286,7 @@
             <div class="modal-content" style="background: #050a14; border: 2px solid #00ffaa; box-shadow: 0 0 40px rgba(0, 255, 170, 0.2);">
                 <div class="modal-header" style="border-bottom: 1px solid #00ffaa;">
                     <h5 class="modal-title pixel-font text-white" style="font-size: 0.8rem;">
-                        > SECURE_CHECKOUT
+                        > PROCESAR_PAGO
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
@@ -337,7 +336,7 @@
 
                 <div class="modal-footer justify-content-center" style="border-top: 1px solid #00ffaa;">
                     <button type="button" class="btn-cyber-chrome w-100 text-center" onclick="confirmarPagoFinal()">
-                        <span class="chrome-text" id="btn-pay-text" style="color: #0a1a3a;">[ PAGAR AHORA ]</span>
+                        <span class="chrome-text" id="btn-pay-text" style="color: #0a1a3a;">PAGAR AHORA</span>
                         <div class="chrome-glare"></div>
                     </button>
                 </div>
@@ -348,7 +347,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content"> <div class="modal-header">
                     <h5 class="modal-title pixel-font" style="font-size: 0.8rem;">
-                        > SYSTEM_MSG: PURCHASE_OK
+                        > COMPRA EXITOSA
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>                
@@ -360,18 +359,13 @@
                         TRANSACCIÓN APROBADA
                     </h4>                    
                     <p class="mb-4" style="color: #a6c1ff; font-family: 'Sora'; font-size: 0.9rem;">
-                        Acceso concedido al archivo digital.
+                        Guardar enlaces antes de salir.
                     </p>                    
                     <div id="lista-links-compra" class="text-start" style="max-height: 300px; overflow-y: auto; padding: 5px;"></div>
-                    <div class="mt-4">
-                        <p class="small text-muted pixel-font" style="font-size: 0.6rem;">
-                            <i class="bi bi-floppy"></i> GUARDAR_ENLACES_ANTES_DE_SALIR
-                        </p>
-                    </div>
                 </div>                
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn-cyber-chrome w-100 text-center" data-bs-dismiss="modal">
-                        <span class="chrome-text" style="color: #0a1a3a;">[ CERRAR Y FINALIZAR ]</span>
+                        <span class="chrome-text" style="color: #0a1a3a;">FINALIZAR</span>
                         <div class="chrome-glare"></div>
                     </button>
                 </div>
@@ -454,6 +448,7 @@
     <script type="module" src="scripts/productos.js"></script>
 </body>
 </html>
+
 
 
 
