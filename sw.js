@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nostalgy-core-v5'; // Versión nueva
+const CACHE_NAME = 'nostalgy-core-v6'; // Versión nueva
 
 const urlsToCache = [
   './',
