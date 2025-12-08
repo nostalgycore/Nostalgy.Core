@@ -21,8 +21,6 @@ const urlsToCache = [
   './recursos/coral-1.wepb',
   './recursos/coral-2.wepb',
   './recursos/coral-3.wepb',
-  './recursos/cursor-pixel.png',
-  './recursos/mano-pixel.png',
   './recursos/cybercore.wepb',
   './recursos/frutiger.wepb',
   './recursos/oldweb.wepb',
