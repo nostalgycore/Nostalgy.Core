@@ -16,7 +16,7 @@ const urlsToCache = [
   './recursos/fondo.webp',
   './recursos/fondo2.webp',
   './recursos/logoNC.webp',
-  './recursos/cursor-pixel.webp',
+  './recursos/cursor-pixel.png',
   './recursos/manoPixel.wepb',
   './recursos/coral-1.wepb',
   './recursos/coral-2.wepb',
