@@ -31,54 +31,46 @@
 
         @media (max-width: 768px) {
             
-            /* 1. Subir la sección para que conecte mejor con el menú */
+            /* 1. MÁS SEPARACIÓN DE LA BARRA DE NAVEGACIÓN */
             .hero-fusion {
-                padding-top: 110px !important; /* Reducimos el espacio de arriba */
+                /* Aumentamos a 160px para bajar más el contenido */
+                padding-top: 160px !important; 
                 padding-bottom: 40px !important;
             }
         
-            /* 2. Ajustar la Tarjeta de Vidrio (Donde está el texto) */
+            /* 2. CENTRAR EL CUADRO Y DARLE AIRE */
             .frutiger-glass-card {
-                padding: 1.5rem !important; /* Menos relleno para que quepa más texto */
-                width: 95% !important;      /* Que ocupe casi todo el ancho */
-                text-align: center !important; /* Centramos todo para que se vea ordenado */
+                margin: 0 auto !important; /* Centrado perfecto */
+                width: 90% !important;     /* Dejar un margen a los lados (no pegado) */
+                padding: 2rem 1.5rem !important;
+                text-align: center !important;
             }
         
-            /* 3. Ajustar el Logo (La TV) */
+            /* 3. LOGO MÁS PEQUEÑO */
             .frutiger-logo {
-                max-height: 150px !important; /* Hacemos la TV más pequeña */
+                max-height: 140px !important;
                 margin-bottom: 15px !important;
                 width: auto;
             }
         
-            /* 4. Arreglar el Título Gigante "NOSTALGY.CORE" */
+            /* 4. ARREGLAR TÍTULO (Hacerlo más pequeño) */
             .title-y2k {
-                font-size: 1.6rem !important; /* Reducimos la fuente drásticamente */
-                line-height: 1.3 !important;
+                /* Reducimos tamaño para que quepa en una línea o se rompa bonito */
+                font-size: 1.5rem !important; 
+                line-height: 1.4 !important;
                 margin-bottom: 15px !important;
-                word-break: break-word; /* Evita que las letras se salgan */
             }
         
-            /* 5. Texto de la descripción */
-            .frutiger-text {
-                font-size: 0.85rem !important; /* Letra un poco más chica para lectura cómoda */
-                line-height: 1.5;
-            }
-        
-            /* 6. Ajuste de la Barra de Navegación (Arriba) */
+            /* 5. ARREGLAR BARRA DE NAVEGACIÓN (Para que no se apriete) */
             .glass-nav-body {
-                padding: 8px 15px !important;
+                padding: 10px !important;
             }
-            
-            /* Hacer el logo del menú un poco más chico para dar espacio al botón */
             .brand-text {
-                font-size: 1.2rem !important;
+                font-size: 1.1rem !important; /* Marca un poco más chica */
             }
-        
-            /* Ajustar el botón "VOLVER A TIENDA" */
             .nav-link-retro {
-                font-size: 0.6rem !important; /* Letra más pequeña */
-                white-space: nowrap; /* Que no se parta en dos líneas */
+                font-size: 0.6rem !important;
+                padding: 5px !important;
             }
         }
     </style>
@@ -310,6 +302,7 @@
 </body>
 
 </html>
+
 
 
 
