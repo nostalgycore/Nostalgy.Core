@@ -1,10 +1,10 @@
-const CACHE_NAME = 'nostalgy-core-v7'; // Versión nueva
+const CACHE_NAME = 'nostalgy-core-v8'; // Versión nueva
 
 const urlsToCache = [
   './',
   './index.html',
   './inicio.html',
-  './admin.html',
+  './admin.html', 
   './nosotros.html',
   './manifest.webmanifest',
   './style/style.css',
@@ -12,22 +12,16 @@ const urlsToCache = [
   './scripts/script.js',
   './scripts/productos.js',
   
-  // IMÁGENES (Verifica que todas existan en la carpeta recursos)
+  // IMÁGENES (Corregidas según tus archivos reales)
   './recursos/fondo.webp',
   './recursos/fondo2.webp',
   './recursos/logoNC.webp',
-  './recursos/cursor-pixel.png',
-  './recursos/manoPixel.wepb',
-  './recursos/coral-1.wepb',
-  './recursos/coral-2.wepb',
-  './recursos/coral-3.wepb',
-  './recursos/cybercore.wepb',
-  './recursos/frutiger.wepb',
-  './recursos/oldweb.wepb',
-  './recursos/y2k.wepb',
-  './recursos/tvrota.mp4',
+  
+  // OJO: En tu carpeta son PNG, no WEBP
+  './recursos/cursor-pixel.png', 
+  './recursos/mano-pixel.png',
+  
   './recursos/fish.glb',
-  // Si agregaste avatares u otras imágenes, agrégalos aquí
   
   // LIBRERÍAS EXTERNAS
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css',
@@ -40,31 +34,28 @@ const urlsToCache = [
   'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.js',
 
-  // FUENTES (Solo los CSS)
+  // FUENTES (Solo los CSS iniciales)
   'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap',
   'https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap',
-  'https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap'
+  'https://fonts.googleapis.com/css2?family=Sora:wght@400;800&display=swap'
 ];
 
 self.addEventListener('install', event => {
-  console.log('[SW] Instalando...');
-  // Usamos skipWaiting para que se active rápido
+  // Forzamos la espera para que se active rápido
   self.skipWaiting();
-  
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        // Intentamos cachear todo. Si algo falla, lo veremos en consola.
+        // Intentamos guardar todo. Si un archivo falta, esto fallará.
         return cache.addAll(urlsToCache);
       })
       .catch(err => {
-        console.error('[SW] CRÍTICO: Falló la caché de instalación. Revisa urlsToCache.', err);
+        console.error('[SW] ERROR CRÍTICO EN INSTALL: Revisa que todos los archivos de urlsToCache existan.', err);
       })
   );
 });
 
 self.addEventListener('activate', event => {
-  console.log('[SW] Activado.');
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
@@ -81,18 +72,19 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // --- ESTRATEGIA 1: FUENTES REALES (gstatic.com) ---
-  // Esto es lo que faltaba para que la tipografía se quede guardada
+  // --- FIX 1: IGNORAR EXTENSIONES DE CHROME ---
+  // Si no empieza con http o https (ej: chrome-extension://), no hacemos nada.
+  if (!url.protocol.startsWith('http')) return;
+
+  // --- ESTRATEGIA 1: FUENTES DE GOOGLE ---
   if (url.origin.includes('fonts.gstatic.com')) {
     event.respondWith(
-      caches.match(event.request).then(response => {
-        if (response) return response; // Si ya la tengo, la uso
-
-        // Si no, la bajo, la guardo y la devuelvo
-        return fetch(event.request).then(newResponse => {
+      caches.match(event.request).then(res => {
+        if (res) return res;
+        return fetch(event.request).then(newRes => {
           return caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, newResponse.clone());
-            return newResponse;
+            cache.put(event.request, newRes.clone());
+            return newRes;
           });
         });
       })
@@ -100,27 +92,26 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // --- ESTRATEGIA 2: CACHÉ FIRST (Resto de archivos) ---
+  // --- ESTRATEGIA 2: CACHÉ FIRST (RESTO) ---
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) return response;
-        
-        return fetch(event.request)
-          .then(networkResponse => {
-            if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic' && networkResponse.type !== 'cors') {
-              return networkResponse;
-            }
-            const responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-            return networkResponse;
-          })
-          .catch(() => console.log('Offline y sin caché:', event.request.url));
-      })
+    caches.match(event.request).then(cachedRes => {
+      if (cachedRes) return cachedRes;
+
+      return fetch(event.request).then(networkRes => {
+        // Validamos que la respuesta sea correcta antes de guardar
+        if (!networkRes || networkRes.status !== 200 || networkRes.type !== 'basic' && networkRes.type !== 'cors') {
+          return networkRes;
+        }
+
+        const resClone = networkRes.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, resClone);
+        });
+
+        return networkRes;
+      }).catch(() => console.log('Offline: recurso no encontrado'));
+    })
   );
 });
